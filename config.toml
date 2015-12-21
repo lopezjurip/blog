@@ -1,4 +1,4 @@
-baseurl = "http://blog.lopezjuri.com/"
+baseurl = "https://blog.lopezjuri.com/"
 title = "blog."
 languageCode = "en-us"
 disqusShortname = "@patriciolpezj"
