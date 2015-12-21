@@ -1,3 +1,68 @@
 baseurl = "http://blog.lopezjuri.com/"
 title = "blog."
 languageCode = "en-us"
+disqusShortname = "@patriciolpezj"
+MetaDataFormat = "toml"
+theme = "hyde-x"
+paginate = 10
+
+[author]
+    name = "Patricio López J."
+
+[permalinks]
+    # Optional. Change the permalink format for the 'post' content type.
+    # The format shown here is the same one Jekyll/Octopress uses by default.
+    post = "/blog/:year/:month/:day/:title/"
+
+[taxonomies]
+    # Optional. Use if you want tags and lists.
+    category = "categories"
+
+#
+# All parameters below here are optional and can be mixed and matched.
+#
+[params]
+    # If false display full article contents in blog index.
+    # Otherwise show description and 'read on' link to individual blog post page.
+    # Default (if omitted) is true.
+    truncate = true
+
+    # Used when a given page doesn't set its own.
+    defaultDescription = "Your default page description"
+    defaultKeywords = "patricio,lopez,page,blog,chile,uc,puc"
+
+    # Changes sidebar background and link/accent colours.
+    # See below for more colour options.
+    # This also works: "theme-base-08 layout-reverse", or just "layout-reverse".
+    theme = ""
+
+    # Select a syntax highight.
+    # Check the static/css/highlight directory for options.
+    highlight = "sunburst"
+
+    # Displays under the author name in the sidebar, keep it short.
+    # You can use markdown here.
+    tagline = "Full-stack developer from Chile"
+
+    # Text for the top menu link, which goes the root URL for the site.
+    # Default (if omitted) is "Blog".
+    home = "Blog"
+
+    # Metadata used to drive integrations.
+    googleAuthorship = "105711235388160251353"
+    googleAnalytics = "UA-57934557-3"
+    gravatarHash = "dc6b7d7fbef65eda1ce854dbe02f8db3"
+
+    # Sidebar social links, these must be full URLs.
+    github = "https://github.com/mrpatiwi"
+    bitbucket = "https://bitbucket.org/account/user/mrpatiwi"
+    stackOverflow = ""
+    linkedin = "https://www.linkedin.com/in/lopezjuri"
+    googleplus = ""
+    facebook = "https://www.facebook.com/patiwi"
+    twitter = "https://twitter.com/MrPatiwi"
+    youtube = ""
+
+    # Other social-like sidebar links
+    rss = false  # switch to true to enable RSS icon link
+    flattr = ""  # populate with your flattr uid
