@@ -1,7 +1,7 @@
 baseurl = "https://blog.lopezjuri.com/"
 title = "blog."
 languageCode = "en-us"
-disqusShortname = "patriciolpezj"
+disqusShortname = "blog-lopezjuri"
 MetaDataFormat = "toml"
 theme = "hyde-x"
 paginate = 10
