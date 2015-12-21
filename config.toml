@@ -28,8 +28,8 @@ paginate = 10
     truncate = true
 
     # Used when a given page doesn't set its own.
-    defaultDescription = "Your default page description"
-    defaultKeywords = "patricio,lopez,page,blog,chile,uc,puc"
+    defaultDescription = ""
+    defaultKeywords = ""
 
     # Changes sidebar background and link/accent colours.
     # See below for more colour options.
@@ -55,14 +55,13 @@ paginate = 10
 
     # Sidebar social links, these must be full URLs.
     github = "https://github.com/mrpatiwi"
-    bitbucket = "https://bitbucket.org/account/user/mrpatiwi"
+    bitbucket = "https://bitbucket.org/mrpatiwi"
     stackOverflow = ""
     linkedin = "https://www.linkedin.com/in/lopezjuri"
     googleplus = ""
-    facebook = "https://www.facebook.com/patiwi"
+    facebook = ""
     twitter = "https://twitter.com/MrPatiwi"
     youtube = ""
 
     # Other social-like sidebar links
-    rss = false  # switch to true to enable RSS icon link
-    flattr = ""  # populate with your flattr uid
+    rss = true  # switch to true to enable RSS icon link
