@@ -6,9 +6,9 @@ keywords = ["setup", "python", "git", "windows"]
 title = "Setup Python 3 & Git on Windows 10"
 +++
 
-Personally, I don't like installing software using binary installers from the official site, because in the long run you have to deal with incompatibilities and a spreaded development ecosystem.
+Personally, I don't like installing software using binary installers from the official site, because in the long run you have to deal with incompatibilities and a sparse development ecosystem.
 
-On systems as OSX or Linux you have well kwonk package-managers like [`brew`](brew.sh) and `apt-get`.
+On systems as OSX or Linux you have well known package-managers like [`brew`](brew.sh) and `apt-get`.
 
 In the case of Windows there is [**Chocolatey**](https://chocolatey.org/).
 
@@ -16,7 +16,7 @@ In the case of Windows there is [**Chocolatey**](https://chocolatey.org/).
 
 ### Installing
 
-We open the `powershell.exe` in **Administrator Mode**.
+We open the `PowerShell` in **Administrator Mode**.
 
 > You can find it at: `C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe`
 
@@ -42,7 +42,7 @@ Example:
 choco install firefox
 ```
 
-You can add a `-y` argument to install inmediatly:
+You can add a `-y` argument to install immediately:
 
 ```sh
 choco install atom -y
@@ -57,7 +57,7 @@ To install git it's simply as:
 choco install git.install
 ```
 
-To start using it, we have to restart the PowerShell or refresh or `$PATH` enviorement variable with:
+To start using it, we have to restart the PowerShell or refresh or `$PATH` environment variable with:
 
 ```sh
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path", "User")
@@ -71,7 +71,7 @@ git help
 
 ### Optional Git Setup
 
-I recomend:
+I recommend:
 
 ```sh
 echo "Identify yourself"
