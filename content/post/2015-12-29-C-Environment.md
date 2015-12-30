@@ -55,9 +55,25 @@ Then, install the package:
 apm install autocomplete-clang
 ```
 
+### [linter-clang](https://atom.io/packages/linter-clang)
+
+Lint your code with [AtomLinter](https://atom.io/users/AtomLinter).
+
+Make sure you have installed [`linter`](https://github.com/atom-community/linter):
+
+```sh
+apm install linter
+```
+
+Then:
+
+```sh
+apm install linter-clang
+```
+
 ### [atom-beautify](https://atom.io/packages/atom-beautify)
 
-To format our C code (and C++, Objective-C, etc) we need [uncrustify](http://sourceforge.net/projects/uncrustify).
+To format our C code (and C++, Objective-C, etc) and fix all those linter's warnings, we need [uncrustify](http://sourceforge.net/projects/uncrustify).
 
 ```sh
 brew install uncrustify
