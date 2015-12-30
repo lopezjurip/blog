@@ -8,7 +8,7 @@ title = "Mounting Go Revel API + MongoDB on Docker"
 
 Go is fast, modern and fun to use. There are good web frameworks like [martini](https://github.com/go-martini/martini) or [gin](https://github.com/gin-gonic/gin). The last time I tried `gin` I had lot of troubles declaring the routes, so I moved to Revel.
 
-It is know that Go doesn't have a very script dependency management, so we will use [github.com/tools/godep](https://github.com/tools/godep).
+It is known that Go doesn't have a very good dependency management, so we will use [github.com/tools/godep](https://github.com/tools/godep).
 
 I am a fan of Docker 🐳, because I like to keep things simple and easy to use (and deploy). So I will write about how to mount a Revel app using Docker.
 
@@ -278,7 +278,7 @@ database.uri  = "mongodb://localhost:27017"  # <- HERE!
 database.name = "revelapp"                   # <- HERE!
 ```
 
-New we need to init our database inside `app/init.go` using `revel.OnAppStart(...)`:
+Now we need to init our database inside `app/init.go` using `revel.OnAppStart(...)`:
 
 ```go
 // app/init.go
