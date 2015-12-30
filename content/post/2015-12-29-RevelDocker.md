@@ -6,7 +6,7 @@ keywords = ["docker", "go", "revel", "api", "mongo", "godep"]
 title = "Mounting Go Revel API + MongoDB on Docker"
 +++
 
-Go is fast, modern and fun to use. There are good web frameworks like [martini]() or [gin](). The last time I tried `gin` I had lot of troubles declaring the routes, so I moved to Revel.
+Go is fast, modern and fun to use. There are good web frameworks like [martini](https://github.com/go-martini/martini) or [gin](https://github.com/gin-gonic/gin). The last time I tried `gin` I had lot of troubles declaring the routes, so I moved to Revel.
 
 It is know that Go doesn't have a very script dependency management, so we will use [github.com/tools/godep](https://github.com/tools/godep).
 
@@ -17,8 +17,9 @@ I am a fan of Docker 🐳, because I like to keep things simple and easy to use 
 ## Preparation
 
 * Make sure you have Go installed and your `$GOPATH` is set.
-* You will need Docker-Machine if you are on OSX.
-* Have Docker and Docker-Compose installed.
+* You will need [Docker-Machine](https://docs.docker.com/machine/) if you are on OSX.
+* Have [Docker](https://www.docker.com/) and [Docker-Compose](https://docs.docker.com/compose/) installed.
+* [MongoDB](https://www.mongodb.org/) installed.
 
 ## Revel
 
@@ -599,11 +600,11 @@ Left pending in this post:
 
 *   A true framework. It calls you, not not the other way around.
 *   Excellent routing system.
-*   It is focused on full-stack web apps.
+*   It is focused on full-stack web apps. I have to try Meteor.js and compare it to Revel before replacing Ruby on Rails 😄
 *   Config file with environments 👌
 
 ## Cons:
 
 *   Manual database integration, but they [have something in plans](https://revel.github.io/#Wishlist).
-*   It have to start with Revel CLI, this can cause some integration problems.
-*   Does it scale?
+*   You must start the app with Revel CLI, this can cause some integration problems.
+*   Does it scale? 📈
