@@ -20,6 +20,6 @@ The purpose of this blog is to share my learnings. It's **open source** and the 
 
 It uses:
 
-*  [gohugo.io](https://gohugo.io/) as static blog engine.
-*  [github.com/zyro/hyde-x](https://github.com/zyro/hyde-x) as theme.
-*  [pages.github.com](https://pages.github.com/) as host.
+*   [gohugo.io](https://gohugo.io/) as static blog engine.
+*   [github.com/zyro/hyde-x](https://github.com/zyro/hyde-x) as theme.
+*   [pages.github.com](https://pages.github.com/) as host.
