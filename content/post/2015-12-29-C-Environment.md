@@ -1,7 +1,7 @@
 +++
 categories = ["c", "setup", "osx"]
 date = "2015-12-29T22:44:57-03:00"
-description = ""
+description = "Setup a modern C development environment with Atom"
 keywords = ["c", "setup", "osx"]
 title = "C Development Environment with Atom on OSX"
 +++
