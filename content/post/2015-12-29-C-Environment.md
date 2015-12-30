@@ -1,8 +1,8 @@
 +++
-categories = ["c", "setup", "osx"]
+categories = ["c", "setup", "osx", "atom"]
 date = "2015-12-29T22:44:57-03:00"
 description = "Setup a modern C development environment with Atom"
-keywords = ["c", "setup", "osx"]
+keywords = ["c", "setup", "osx", "atom"]
 title = "C Development Environment with Atom on OSX"
 +++
 
