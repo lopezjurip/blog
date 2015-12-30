@@ -93,21 +93,10 @@ choco install python -y
 
 ### pip
 
-Pip comes with this installation, you can see it at `C:\tools\python\Scripts`, but it is not added to the `$PATH`.
+Pip comes with this installation, you can see it at `C:\tools\python\Scripts`.
+
+Try, `pip` on your console, if it does not work, restart the PowerShell. If the problem continues, it's probably because it is not added to the `$PATH`.
 
 To do so:
 
 `[Environment]::SetEnvironmentVariable("Path", "$env:Path;C:\tools\python\Scripts\", "User")`
-
-Now refresh the  `$PATH`:
-
-```sh
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path", "User")
-```
-
-Let's install some common libraries:
-
-```sh
-pip install -i https://pypi.binstar.org/carlkl/simple numpy
-pip install --upgrade matplotlib
-```
