@@ -157,7 +157,7 @@ gulp.task('watch', ['build'], function() {
 gulp.task('default', ['build']);
 ```
 
-Now we have the following avilable on the command line:
+Now we have the following available on the command line:
 
 *   `gulp build`: Take all the Typescript code and produces the `.js` code.
 *   `gulp watch`: Every change on a `.ts` or `.tsx` file will trigger `gulp build`.
@@ -193,7 +193,7 @@ This will update the `tsd.json` like this:
 
 And the `typings` directory as:
 
-```
+```txt
 ReactNativeTS
 └── typings
     ├── react-native
