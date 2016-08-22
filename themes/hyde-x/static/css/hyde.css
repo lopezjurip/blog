@@ -248,3 +248,9 @@ a.sidebar-nav-item:focus {
 .theme-base-0f .related-posts li a:hover {
   color: #8f5536;
 }
+
+code.has-jax {font: inherit;
+              font-size: 100%;
+              background: inherit;
+              border: inherit;
+              color: #515151;}
