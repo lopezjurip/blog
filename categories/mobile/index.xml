@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mobile on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/mobile/</link>
+    <description>Recent content in Mobile on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 30 Dec 2015 09:01:44 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/mobile/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>React Native &#43; Typescript</title>
+      <link>https://blog.lopezjuri.com/2015/12/30/react-native--typescript/</link>
+      <pubDate>Wed, 30 Dec 2015 09:01:44 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/30/react-native--typescript/</guid>
+      <description>
+
+&lt;p&gt;&lt;a href=&#34;https://facebook.github.io/react-native&#34;&gt;React-Native&lt;/a&gt; is a big deal, you should try it.&lt;/p&gt;
+
+&lt;p&gt;By default, it comes with &lt;a href=&#34;http://flowtype.org&#34;&gt;Flow&lt;/a&gt; support, but in this case we will setup a project using &lt;a href=&#34;http://www.typescriptlang.org&#34;&gt;Typescript&lt;/a&gt;. It&amp;rsquo;s awesome how Typescript increases in popularity thanks to projects like &lt;a href=&#34;https://angular.io&#34;&gt;Angular2&lt;/a&gt; and how all the community maintains the typings.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;See the complete project and more complex code on: &lt;a href=&#34;https://github.com/mrpatiwi/ReactNativeTS&#34;&gt;&lt;strong&gt;github.com/mrpatiwi/ReactNativeTS&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;requirements:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Requirements&lt;/h2&gt;
+
+&lt;p&gt;Follow the official requirements on &lt;a href=&#34;https://facebook.github.io/react-native/docs/getting-started.html#requirements&#34;&gt;facebook.github.io/react-native/docs/getting-started.html#requirements&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;setup:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Setup&lt;/h3&gt;
+
+&lt;p&gt;Install &lt;a href=&#34;http://brew.sh&#34;&gt;Homebrew&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install &lt;a href=&#34;https://github.com/creationix/nvm&#34;&gt;nvm&lt;/a&gt; (Node Version Manager):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew update &amp;amp;&amp;amp; brew install nvm
+mkdir ~/.nvm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Add this to your &lt;code&gt;~/.bash_profile&lt;/code&gt; or &lt;code&gt;~/.zshconfig&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install the lastest version of Node:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;nvm install node &amp;amp;&amp;amp; nvm alias default node
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install Facebook&amp;rsquo;s &lt;code&gt;watchman&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew install watchman
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install &lt;code&gt;react-native-cli&lt;/code&gt;, Typescript and &lt;a href=&#34;https://github.com/DefinitelyTyped/tsd&#34;&gt;DefinitelyTyped/tsd&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;npm install -g react-native-cli typescript tsd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;init-project:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Init Project&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create a project named &lt;code&gt;ReactNativeTS&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;react-native init ReactNativeTS
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We will remove &lt;code&gt;.flowconfig&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;rm .flowconfig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;init-typescript-settings:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Init Typescript settings&lt;/h2&gt;
+
+&lt;p&gt;This will create:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;tsconfig.json&lt;/code&gt;: Settings to tell Typescript how to &lt;em&gt;compile&lt;/em&gt; our code.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tsd.json&lt;/code&gt;: Typings version manager&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tsd init &amp;amp;&amp;amp; tsc --init
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We will modify &lt;code&gt;tsconfig.json&lt;/code&gt; and set it as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;{
+    &amp;quot;compilerOptions&amp;quot;: {
+        &amp;quot;target&amp;quot;: &amp;quot;es6&amp;quot;,
+        &amp;quot;jsx&amp;quot;: &amp;quot;react&amp;quot;,
+        &amp;quot;noImplicitAny&amp;quot;: true,
+        &amp;quot;experimentalDecorators&amp;quot;: true,
+        &amp;quot;preserveConstEnums&amp;quot;: true,
+        &amp;quot;outDir&amp;quot;: &amp;quot;built&amp;quot;,
+        &amp;quot;rootDir&amp;quot;: &amp;quot;src&amp;quot;,
+        &amp;quot;sourceMap&amp;quot;: true
+    },
+    &amp;quot;filesGlob&amp;quot;: [
+        &amp;quot;typings/**/*.d.ts&amp;quot;,
+        &amp;quot;src/**/*.ts&amp;quot;,
+        &amp;quot;src/**/*.tsx&amp;quot;
+    ],
+    &amp;quot;exclude&amp;quot;: [
+        &amp;quot;node_modules&amp;quot;
+    ],
+    &amp;quot;compileOnSave&amp;quot;: false
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;We will compile to ES6 (ES2015).&lt;/li&gt;
+&lt;li&gt;Use React support&lt;/li&gt;
+&lt;li&gt;The input code have to be placed at &lt;code&gt;src&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The output code will be placed at &lt;code&gt;built&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;compileOnSave&lt;/code&gt; is for your IDE, in my case Atom.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Make sure to add &lt;code&gt;built&lt;/code&gt; to your &lt;code&gt;.gitignore&lt;/code&gt;&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-gitignore&#34;&gt;# .gitignore
+
+# Typescript Output
+built
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;dependencies:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Dependencies&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;rsquo;s install some dependencies:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;npm install --save-dev typescript gulp gulp-typescript concurrently
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://gulpjs.com&#34;&gt;&lt;code&gt;gulp&lt;/code&gt;&lt;/a&gt; as our building system.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.npmjs.com/package/concurrently&#34;&gt;&lt;code&gt;concurrently&lt;/code&gt;&lt;/a&gt; so we can watch and have started the ReactNative in the same terminal session.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;gulpfile:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Gulpfile&lt;/h2&gt;
+
+&lt;p&gt;Now, we have to setup the &lt;code&gt;gulpfile.js&lt;/code&gt; to declare our build pipeline:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;var gulp = require(&#39;gulp&#39;);
+var ts = require(&#39;gulp-typescript&#39;);
+
+// Grab settings from tsconfig.json
+var tsProject = ts.createProject(&#39;tsconfig.json&#39;);
+
+gulp.task(&#39;build&#39;, function() {
+    var tsResult = tsProject.src().pipe(ts(tsProject));
+    return tsResult.js.pipe(gulp.dest(&#39;built&#39;));
+});
+
+gulp.task(&#39;watch&#39;, [&#39;build&#39;], function() {
+  gulp.watch(&#39;src/**/*.ts&#39;, [&#39;build&#39;]);
+  gulp.watch(&#39;src/**/*.tsx&#39;, [&#39;build&#39;]);
+});
+
+gulp.task(&#39;default&#39;, [&#39;build&#39;]);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we have the following available on the command line:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;gulp build&lt;/code&gt;: Take all the Typescript code and produces the &lt;code&gt;.js&lt;/code&gt; code.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;gulp watch&lt;/code&gt;: Every change on a &lt;code&gt;.ts&lt;/code&gt; or &lt;code&gt;.tsx&lt;/code&gt; file will trigger &lt;code&gt;gulp build&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;typings:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Typings&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s install the typings we need:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;tsd install --save react-native
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will update the &lt;code&gt;tsd.json&lt;/code&gt; like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;
+{
+  &amp;quot;version&amp;quot;: &amp;quot;v4&amp;quot;,
+  &amp;quot;repo&amp;quot;: &amp;quot;borisyankov/DefinitelyTyped&amp;quot;,
+  &amp;quot;ref&amp;quot;: &amp;quot;master&amp;quot;,
+  &amp;quot;path&amp;quot;: &amp;quot;typings&amp;quot;,
+  &amp;quot;bundle&amp;quot;: &amp;quot;typings/tsd.d.ts&amp;quot;,
+  &amp;quot;installed&amp;quot;: {
+    &amp;quot;react-native/react-native.d.ts&amp;quot;: {
+      &amp;quot;commit&amp;quot;: &amp;quot;dc9dabe74a5be62613b17a3605309783a12ff28a&amp;quot;
+    },
+    &amp;quot;react/react.d.ts&amp;quot;: {
+      &amp;quot;commit&amp;quot;: &amp;quot;dc9dabe74a5be62613b17a3605309783a12ff28a&amp;quot;
+    }
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the &lt;code&gt;typings&lt;/code&gt; directory as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;ReactNativeTS
+└── typings
+    ├── react-native
+    ├── react
+    └── tsd.d.ts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;hello-world:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Hello world&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s modify the entry points of the app:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// index.ios.js
+
+&#39;use strict&#39;
+
+import { AppRegistry } from &#39;react-native&#39;
+import App from &#39;./built&#39;
+
+AppRegistry.registerComponent(&#39;ReactNativeTS&#39;, () =&amp;gt; App)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-js&#34;&gt;// index.android.js
+
+&#39;use strict&#39;
+
+import { AppRegistry } from &#39;react-native&#39;
+import App from &#39;./built&#39;
+
+AppRegistry.registerComponent(&#39;ReactNativeTS&#39;, () =&amp;gt; App)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Yes, they are identical. React-Native automatically picks the &lt;code&gt;.android&lt;/code&gt; or &lt;code&gt;.ios&lt;/code&gt; file from a local dependency, in this case the &lt;code&gt;index.js&lt;/code&gt; of &lt;code&gt;build&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;typescript-files:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Typescript files&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;rsquo;s convert the default hello world page to &lt;code&gt;.tsx&lt;/code&gt;, we will start with the iOS part:&lt;/p&gt;
+
+&lt;p&gt;Import dependencies:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tsx&#34;&gt;// src/index.ios.tsx
+
+/// &amp;lt;reference path=&amp;quot;../typings/tsd.d.ts&amp;quot;/&amp;gt;
+
+import React from &amp;quot;react-native&amp;quot;;
+const { StyleSheet, Text, View } = React;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;style&lt;/code&gt; remains the same:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tsx&#34;&gt;const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: &amp;quot;center&amp;quot;,
+        alignItems: &amp;quot;center&amp;quot;,
+        backgroundColor: &amp;quot;#F5FCFF&amp;quot;,
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: &amp;quot;center&amp;quot;,
+        margin: 10,
+    },
+    instructions: {
+        textAlign: &amp;quot;center&amp;quot;,
+        color: &amp;quot;#333333&amp;quot;,
+        marginBottom: 5,
+    },
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the &lt;code&gt;App&lt;/code&gt; class will be like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tsx&#34;&gt;// We are exporting it
+export default class App extends React.Component&amp;lt;any, any&amp;gt; {
+    render() {
+        return (
+            &amp;lt;View style={styles.container}&amp;gt;
+                &amp;lt;Text style={styles.welcome}&amp;gt;
+                    Welcome to React Native
+                &amp;lt;/Text&amp;gt;
+                &amp;lt;Text style={styles.instructions}&amp;gt;
+                    To get started, edit index.ios.js
+                &amp;lt;/Text&amp;gt;
+                &amp;lt;Text style={styles.instructions}&amp;gt;
+                    Press Cmd+R to reload, {&amp;quot;\n&amp;quot;}
+                    Cmd+D or shake for dev menu
+                &amp;lt;/Text&amp;gt;
+            &amp;lt;/View&amp;gt;
+        );
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;src/index.android.tsx&lt;/code&gt; is very similar:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-tsx&#34;&gt;// src/index.android.tsx
+
+/// &amp;lt;reference path=&amp;quot;../typings/tsd.d.ts&amp;quot;/&amp;gt;
+
+import React from &amp;quot;react-native&amp;quot;;
+const { StyleSheet, Text, View } = React;
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: &amp;quot;center&amp;quot;,
+        alignItems: &amp;quot;center&amp;quot;,
+        backgroundColor: &amp;quot;#F5FCFF&amp;quot;,
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: &amp;quot;center&amp;quot;,
+        margin: 10,
+    },
+    instructions: {
+        textAlign: &amp;quot;center&amp;quot;,
+        color: &amp;quot;#333333&amp;quot;,
+        marginBottom: 5,
+    },
+});
+
+
+export default class App extends React.Component&amp;lt;any, any&amp;gt; {
+    render() {
+        return (
+            &amp;lt;View style={styles.container}&amp;gt;
+                &amp;lt;Text style={styles.welcome}&amp;gt;
+                    Welcome to React Native!
+                &amp;lt;/Text&amp;gt;
+                &amp;lt;Text style={styles.instructions}&amp;gt;
+                    To get started, edit index.android.js
+                &amp;lt;/Text&amp;gt;
+                &amp;lt;Text style={styles.instructions}&amp;gt;
+                    Shake or press menu button for dev menu
+                &amp;lt;/Text&amp;gt;
+            &amp;lt;/View&amp;gt;
+        );
+    }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-the-app:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Run the app&lt;/h2&gt;
+
+&lt;p&gt;I recommend adding this scripts to &lt;code&gt;package.json&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-json&#34;&gt;&amp;quot;scripts&amp;quot;: {
+    &amp;quot;build&amp;quot;: &amp;quot;gulp build&amp;quot;,
+    &amp;quot;watch&amp;quot;: &amp;quot;gulp watch&amp;quot;,
+    &amp;quot;start&amp;quot;: &amp;quot;concurrent \&amp;quot;npm run watch\&amp;quot; \&amp;quot;node node_modules/react-native/local-cli/cli.js start\&amp;quot; &amp;quot;,
+    &amp;quot;android&amp;quot;: &amp;quot;adb reverse tcp:8081 tcp:8081 &amp;amp;&amp;amp; react-native run-android&amp;quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Run it!:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;npm start
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/reactnativets-terminal.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;see-the-result:7303417269c8a820a1613a3c6647d5b4&#34;&gt;See the result&lt;/h2&gt;
+
+&lt;h3 id=&#34;ios:7303417269c8a820a1613a3c6647d5b4&#34;&gt;iOS&lt;/h3&gt;
+
+&lt;p&gt;Open &lt;code&gt;ios/ReactNativeTS.xcodeproj&lt;/code&gt; with XCode and press play.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/reactnativets-ios.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h3 id=&#34;android:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Android&lt;/h3&gt;
+
+&lt;p&gt;See &lt;a href=&#34;https://facebook.github.io/react-native/docs/android-setup.html&#34;&gt;facebook.github.io/react-native/docs/android-setup.html&lt;/a&gt;.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/reactnativets-android.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h1 id=&#34;conclusions:7303417269c8a820a1613a3c6647d5b4&#34;&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;We can see that it&amp;rsquo;s 100% possible to write React-Native apps with Typescript.&lt;/p&gt;
+
+&lt;p&gt;The problem comes with maintainability, because the React-Native team is moving fast and the typings will not have official support.&lt;/p&gt;
+
+&lt;p&gt;Maybe it&amp;rsquo;s better to stick with Flow.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Comentarios sobre cómo Hacker News ordena las noticias &middot; Patricio López J.</title>
+
+  
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-x.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/highlight/railscasts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.lopezjuri.com/touch-icon-144-precomposed.png">
+  <link href="https://blog.lopezjuri.com/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="author" href="http://plus.google.com/105711235388160251353">
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+        <img src="https://www.gravatar.com/avatar/dc6b7d7fbef65eda1ce854dbe02f8db3?s=200"
+             alt="gravatar" title="Patricio López J.">
+      
+      <h1>Patricio López J.</h1>
+      <p class="lead">Full-stack developer from Chile</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/">Blog</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/mrpatiwi"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://bitbucket.org/mrpatiwi"><i class="fa fa-bitbucket-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/lopezjuri"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/MrPatiwi"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="https://blog.lopezjuri.com/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2016 <a href="https://blog.lopezjuri.com/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1>Comentarios sobre cómo Hacker News ordena las noticias</h1>
+    <span class="post-date">Aug 14, 2016 &middot; 4 minute read &middot; <a href="https://blog.lopezjuri.com/2016/08/14/comentarios-sobre-c%C3%B3mo-hacker-news-ordena-las-noticias/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://blog.lopezjuri.com/categories/recsys">recsys</a>
+    </span>
+    
+
+<p>Todos los días en la mañana, en el transporte público y/o en momento de procrastinación leo <a href="https://news.ycombinator.com/">Hacker News</a> para mantenerme al día.</p>
+
+
+<figure >
+    
+        <img src="/images/hackernews-1.png" />
+    
+    
+</figure>
+
+
+<p>En mi ramo de <a href="http://dparra.sitios.ing.uc.cl/classes/recsys-2016-2/">Sistemas Recomendadores</a> me topé con este artículo que habla sobre el algoritmo que hay por detrás de su sección principal:</p>
+
+<p><strong><a href="https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d">https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d</a></strong></p>
+
+<blockquote>
+<p>Se puede ver la implementación del algoritmo en esa página.</p>
+</blockquote>
+
+<p>Resulta que este se aplica para cada item en particular sin importar el contexto o relación con otros. Para que se mantenga la lista viva y renovándose, involucra un decaimiento por tiempo, con un parámetro <code>gravedad</code>.</p>
+
+<p>El beneficio de esto es que permite gran escalabilidad, e incluso se puede realizar el ordenamiento en el cliente por medio de <em>Javascript</em>.</p>
+
+<p>Implementación (versión simple) en <em>Javascript ES7+</em>:</p>
+
+<pre><code class="language-js">// npm install moment lodash
+import moment from 'moment';
+import orderBy from 'lodash/orderBy';
+
+// Data
+const news = [{
+  title: '#1'
+  upvotes: 220,
+  creation: moment().subtract(2, 'hours'),
+}, {
+  title: '#2'
+  upvotes: 80,
+  creation: moment().subtract(1, 'hours'),
+}];
+
+function hackernews(gravity = 1.8) {
+  return function({ upvotes, creation }) {
+    const hours = moment().diff(moment(creation), 'hours');
+    return (upvotes - 1) / Math.pow(hours + 2, gravity);
+  }
+}
+
+const rater = hackernews();
+const rated = news.map(n =&gt; ({ ...n, score: rater(...n) }));
+const sorted = orderBy(rated, 'score', 'desc');
+
+console.log(sorted);
+</code></pre>
+
+<h2 id="mejoras:25fc98aa83e9a42ae1c18dd34ef7f728">Mejoras</h2>
+
+<p>Aunque todavía es bastante discutible si el algoritmo funciona bien, pues el tiempo es gravemente penalizado:</p>
+
+<blockquote>
+<p>Mirar imagen de arriba y ver que la noticia en segundo lugar tiene más puntos que la primera en la lista en un intervalo de tiempo similar (quizás con diferencia de minutos).</p>
+</blockquote>
+
+<p>Un factor importante que se ignora, y que es el punto al que voy, son los comentarios dentro de cada item. Esto es una sutileza (como las que aparecen <a href="http://www.evanmiller.org/how-not-to-sort-by-average-rating.html">acá</a>), pero detalles así alteran la percepción final del usuario.</p>
+
+<p>El problema al que me refiero se puede apreciar en la siguiente imagen:</p>
+
+
+<figure >
+    
+        <img src="/images/hackernews-2.png" />
+    
+    
+</figure>
+
+
+<ul>
+<li>El primero en la lista tiene solo 5 comentarios.</li>
+<li>El segundo en la lista, a pesar de tener menos puntos, <strong>en menos tiempo lleva más de 5 veces más comentarios que el primero.</strong></li>
+<li>También es bien dudosa la diferencia entre el 4 y el 7.</li>
+</ul>
+
+<p>Una noticia que causa grandes discuciones debería tener un mejor <em>rating</em>.</p>
+
+<h3 id="cómo-incluir-los-comentarios-en-el-algoritmo:25fc98aa83e9a42ae1c18dd34ef7f728">¿Cómo incluir los comentarios en el algoritmo?</h3>
+
+<p>Cabe mencionar que hace unos meses se agregó la <em>feature</em> que permite darle <em>upvote</em> a los comentarios.</p>
+
+<p>Se me ocurren las siguientes maneras:</p>
+
+<h4 id="1-por-novedad:25fc98aa83e9a42ae1c18dd34ef7f728">1) Por novedad</h4>
+
+<p>Podríamos asignar una puntuación adicional al algoritmo con respecto <strong>a la novedad último comentario de la noticia</strong>. Incluso reutilizar el algoritmo original. Debería ser necesario agregar un factor de peso al puntaje por novedad del comentario. A modo de ejemplo elegiré <code>0.3</code> como valor arbitrario:</p>
+
+<pre><code class="language-js">function hackernews(gravity = 1.8, factor = 0.3) {
+  // lastComment should be an object with 'upvotes' and 'creation' keys
+  return function algorithm({ upvotes, creation, lastComment }) {
+    const hours = moment().diff(moment(creation), 'hours');
+    const score = (upvotes - 1) / Math.pow(hours + 2, gravity);
+
+    if (lastComment) {
+      return score + (factor * algorithm({ ...lastComment })); // recursive call
+    } else {
+      return score;
+    }
+  }
+}
+</code></pre>
+
+<p><strong>Problemas:</strong> Puede que la gente abuse con el clásico <strong><em>bump</em></strong> con fin de mantener el <em>thread</em> arriba. Incluso una noticia con pocos comentarios puede salir a flote como consecuencia de un nuevo comentario.</p>
+
+<h4 id="2-por-cantidad-de-comentarios:25fc98aa83e9a42ae1c18dd34ef7f728">2) Por cantidad de comentarios</h4>
+
+<p>Similar a lo anterior. Con un peso que añada cierto valor adicional al <em>score</em>. Sería relativamente simple de implementar y no sacrifica tanto la escalabilidad (ver <a href="http://www.itorian.com/2013/06/what-is-eager-loading-and-what-is-lazy.html">eager-loading</a> o <a href="http://ryan.mcgeary.org/2016/02/05/proper-counter-cache-migrations-in-rails/">counter-cache</a>).</p>
+
+<pre><code class="language-js">function hackernews(gravity = 1.8, factor = 0.3) {
+  return function algorithm({ upvotes, creation, comments }) {
+    const hours = moment().diff(moment(creation), 'hours');
+    const score = (upvotes - 1) / Math.pow(hours + 2, gravity);
+    return score + (factor * comments.length);
+  }
+}
+</code></pre>
+
+<p><strong>Problemas</strong>: En el peor caso, un <em>bot</em> podría abusar y <em>spammear</em> 10000 comentarios por segundo con el fin de posicionar una noticia.</p>
+
+<h4 id="3-por-distribución-de-comentarios-en-el-tiempo:25fc98aa83e9a42ae1c18dd34ef7f728">3) Por distribución de comentarios en el tiempo</h4>
+
+<p>Una medida que considere cómo ocurren los comentarios dentro de un intervalo de tiempo, <em>premiando</em> a las noticias que mantengan una <em>conversación</em> constante puede ser un mejor indicador de una buena noticia. También dificultaría un poco a los <em>bots</em> que quieran sacar provecho.</p>
+
+<p><strong>Problema:</strong> Quizás ponga en juego la escalabilidad y requeriría buscar alguna distribución que se ajuste bien.</p>
+
+<h2 id="conclusión:25fc98aa83e9a42ae1c18dd34ef7f728">Conclusión</h2>
+
+<p>Probablemente una opción como la <em>2)</em> sería lo más adecuado para implementar, con el fin de mantener la simpleza y la escalabilidad.</p>
+
+<p>Finalmente, <strong>me he cuestionado si realmente es una buena idea incluir comentarios a los <em>ratings</em> por lo fácil que puede ser para <em>bots</em> manipular los puntajes.</strong> Esto pues una misma cuenta puede publicar cuantos comentarios quiera en un mismo item, en comparación con asignar un rating que solo se puede hacer una sola vez por item.</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "blog-lopezjuri";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "blog-lopezjuri";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://blog.lopezjuri.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  var _gaq=[['_setAccount','UA-57934557-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+

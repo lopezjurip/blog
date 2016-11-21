@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Get GoogleMaps.com coordinates to clipboard on click &middot; Patricio López J.</title>
+
+  
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-x.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/highlight/railscasts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.lopezjuri.com/touch-icon-144-precomposed.png">
+  <link href="https://blog.lopezjuri.com/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="google maps,jquery,javascript,injection,coordinates,click">
+  <link rel="author" href="http://plus.google.com/105711235388160251353">
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+        <img src="https://www.gravatar.com/avatar/dc6b7d7fbef65eda1ce854dbe02f8db3?s=200"
+             alt="gravatar" title="Patricio López J.">
+      
+      <h1>Patricio López J.</h1>
+      <p class="lead">Full-stack developer from Chile</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/">Blog</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/mrpatiwi"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://bitbucket.org/mrpatiwi"><i class="fa fa-bitbucket-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/lopezjuri"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/MrPatiwi"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="https://blog.lopezjuri.com/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2016 <a href="https://blog.lopezjuri.com/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1>Get GoogleMaps.com coordinates to clipboard on click</h1>
+    <span class="post-date">Dec 28, 2015 &middot; 3 minute read &middot; <a href="https://blog.lopezjuri.com/2015/12/28/get-googlemaps.com-coordinates-to-clipboard-on-click/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://blog.lopezjuri.com/categories/scripts">scripts</a><a class="label" href="https://blog.lopezjuri.com/categories/tools">tools</a><a class="label" href="https://blog.lopezjuri.com/categories/javascript">javascript</a>
+    </span>
+    
+
+<p>If you want to develop a Geolocalized app, <strong>you probably will need some seeds</strong>. Getting the coordinates requires a lot of clicks and mouse manipulation, making this task really slow 😥.</p>
+
+<p>So, I wrote a Javascript code to inject some functions to <a href="https://googlemaps.com">googlemaps.com</a>, just to make it easier 👌</p>
+
+<blockquote>
+<p>You can view final result and code <a href="#result:0b9061f9c618b2025873ec399dede6d4">here</a>.</p>
+</blockquote>
+
+<h2 id="the-current-and-slow-method:0b9061f9c618b2025873ec399dede6d4">The Current and Slow Method</h2>
+
+<ol>
+<li>Go to the map and click the location you want.</li>
+<li>Select the coordinates from the bottom modal view (Do not click it!).</li>
+<li><code>CTRL+C</code> or <code>CMD+C</code>.</li>
+<li>Click somewhere else to hide the view.</li>
+<li>Go to step <code>1.</code> with another location.</li>
+</ol>
+
+
+<figure >
+    
+        <img src="/images/googlemaps-default.png" />
+    
+    
+</figure>
+
+
+<h2 id="the-hacker-and-fun-way:0b9061f9c618b2025873ec399dede6d4">The Hacker (and fun) Way</h2>
+
+<p>Let&rsquo;s open the <strong>Developer Tools</strong>:</p>
+
+
+<figure >
+    
+        <img src="/images/googlemaps-devtools.png" />
+    
+    
+</figure>
+
+
+<p>Now, we will inject <a href="https://jquery.com/"><code>jQuery</code></a> to the webpage 💉 adding a <code>&lt;script/&gt;</code> element and appending to the <code>&lt;head/&gt;</code>:</p>
+
+<pre><code class="language-javascript">var script = document.createElement('script');
+script.src = &quot;//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;;
+document.getElementsByTagName('head')[0].appendChild(script);
+</code></pre>
+
+<p>Remember the floating view from the bottom? OK, let&rsquo;s get the element containing the coordinates:</p>
+
+<pre><code class="language-javascript">// Get coordinates &lt;a&gt; object
+var coords = jQuery('#reveal-card &gt; div &gt; div.widget-reveal-card-container &gt; a')
+</code></pre>
+
+<p>See the point <code>4.</code> from the old fashioned way, <strong>we don&rsquo;t want to click somewhere else to hide the view after copying the contents</strong>.</p>
+
+<p>So we will programmatically press the <em>close</em> button, but first we need the <code>&lt;button/&gt;</code> element:</p>
+
+<pre><code class="language-javascript">// Get close button
+var cross = jQuery('#reveal-card &gt; div &gt; button.widget-reveal-card-close')
+</code></pre>
+
+<h3 id="events:0b9061f9c618b2025873ec399dede6d4">Events</h3>
+
+<p>Finally, we need to add an event: <em>every time the coordinates change should trigger an action that will capture the new coordinates.</em></p>
+
+<p>So, to the <code>coords</code> element we will response to <code>DOMSubtreeModified</code> event:</p>
+
+<pre><code class="language-javascript">coords.bind('DOMSubtreeModified', function() {
+
+  /*
+  TODO: Copy coordinates
+  */
+
+  // Close box
+  cross.click();
+}
+</code></pre>
+
+<p>My first approach to copy the contents was using <code>document.execCommand('copy')</code>:</p>
+
+<pre><code class="language-javascript">coords.bind('DOMSubtreeModified', function() {
+  jQuery(this).select();
+
+  try {
+    // Always false :(
+    var success = document.execCommand('copy');
+    if (!success) {
+      console.error('could not be copied');
+    }
+  } catch(err) {
+    console.error('Oops, unable to copy');
+    console.error(err);
+  }
+
+  // Close box
+  cross.click();
+});
+</code></pre>
+
+<p>But, <strong><code>document.execCommand</code> does not work on DeveloperTools</strong>.</p>
+
+<p>After spending a while researching, I found out that Chrome exposes the <code>copy('text')</code> function:</p>
+
+<pre><code class="language-javascript">coords.bind('DOMSubtreeModified', function() {
+  // Get text
+  var text = jQuery(this).text();
+
+  // Copy coordinates to clipboard :)
+  copy(text);
+
+  // Display to console
+  console.log(text);
+
+  // Close box
+  cross.click();
+});
+</code></pre>
+
+<h3 id="result:0b9061f9c618b2025873ec399dede6d4">Result</h3>
+
+
+<figure >
+    
+        <img src="/images/googlemaps-result.gif" />
+    
+    
+</figure>
+
+
+<h4 id="full-code:0b9061f9c618b2025873ec399dede6d4">Full Code</h4>
+
+<pre><code class="language-javascript">// Inject jQuery
+var script = document.createElement('script');
+script.src = &quot;//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&quot;;
+document.getElementsByTagName('head')[0].appendChild(script);
+</code></pre>
+
+<p><strong>Wait a second here</strong>.</p>
+
+<pre><code class="language-javascript">
+// Get coordinates &lt;a&gt; object
+var coords = jQuery('#reveal-card &gt; div &gt; div.widget-reveal-card-container &gt; a')
+
+// Get close button
+var cross = jQuery('#reveal-card &gt; div &gt; button.widget-reveal-card-close')
+
+// Add actions
+coords.bind('DOMSubtreeModified', function() {
+  // Get text
+  var text = jQuery(this).text();
+
+  // Copy coordinates to clipboard
+  copy(text);
+
+  // Display to console
+  console.log(text);
+
+  // Close box
+  cross.click();
+});
+</code></pre>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "blog-lopezjuri";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "blog-lopezjuri";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://blog.lopezjuri.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  var _gaq=[['_setAccount','UA-57934557-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+

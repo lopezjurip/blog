@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scripts on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/scripts/</link>
+    <description>Recent content in Scripts on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Dec 2015 12:46:08 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/scripts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Get GoogleMaps.com coordinates to clipboard on click</title>
+      <link>https://blog.lopezjuri.com/2015/12/28/get-googlemaps.com-coordinates-to-clipboard-on-click/</link>
+      <pubDate>Mon, 28 Dec 2015 12:46:08 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/28/get-googlemaps.com-coordinates-to-clipboard-on-click/</guid>
+      <description>
+
+&lt;p&gt;If you want to develop a Geolocalized app, &lt;strong&gt;you probably will need some seeds&lt;/strong&gt;. Getting the coordinates requires a lot of clicks and mouse manipulation, making this task really slow 😥.&lt;/p&gt;
+
+&lt;p&gt;So, I wrote a Javascript code to inject some functions to &lt;a href=&#34;https://googlemaps.com&#34;&gt;googlemaps.com&lt;/a&gt;, just to make it easier 👌&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You can view final result and code &lt;a href=&#34;#result:0b9061f9c618b2025873ec399dede6d4&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;the-current-and-slow-method:0b9061f9c618b2025873ec399dede6d4&#34;&gt;The Current and Slow Method&lt;/h2&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Go to the map and click the location you want.&lt;/li&gt;
+&lt;li&gt;Select the coordinates from the bottom modal view (Do not click it!).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;CTRL+C&lt;/code&gt; or &lt;code&gt;CMD+C&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Click somewhere else to hide the view.&lt;/li&gt;
+&lt;li&gt;Go to step &lt;code&gt;1.&lt;/code&gt; with another location.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/googlemaps-default.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;the-hacker-and-fun-way:0b9061f9c618b2025873ec399dede6d4&#34;&gt;The Hacker (and fun) Way&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s open the &lt;strong&gt;Developer Tools&lt;/strong&gt;:&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/googlemaps-devtools.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Now, we will inject &lt;a href=&#34;https://jquery.com/&#34;&gt;&lt;code&gt;jQuery&lt;/code&gt;&lt;/a&gt; to the webpage 💉 adding a &lt;code&gt;&amp;lt;script/&amp;gt;&lt;/code&gt; element and appending to the &lt;code&gt;&amp;lt;head/&amp;gt;&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;var script = document.createElement(&#39;script&#39;);
+script.src = &amp;quot;//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&amp;quot;;
+document.getElementsByTagName(&#39;head&#39;)[0].appendChild(script);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remember the floating view from the bottom? OK, let&amp;rsquo;s get the element containing the coordinates:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Get coordinates &amp;lt;a&amp;gt; object
+var coords = jQuery(&#39;#reveal-card &amp;gt; div &amp;gt; div.widget-reveal-card-container &amp;gt; a&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See the point &lt;code&gt;4.&lt;/code&gt; from the old fashioned way, &lt;strong&gt;we don&amp;rsquo;t want to click somewhere else to hide the view after copying the contents&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;So we will programmatically press the &lt;em&gt;close&lt;/em&gt; button, but first we need the &lt;code&gt;&amp;lt;button/&amp;gt;&lt;/code&gt; element:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Get close button
+var cross = jQuery(&#39;#reveal-card &amp;gt; div &amp;gt; button.widget-reveal-card-close&#39;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;events:0b9061f9c618b2025873ec399dede6d4&#34;&gt;Events&lt;/h3&gt;
+
+&lt;p&gt;Finally, we need to add an event: &lt;em&gt;every time the coordinates change should trigger an action that will capture the new coordinates.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;So, to the &lt;code&gt;coords&lt;/code&gt; element we will response to &lt;code&gt;DOMSubtreeModified&lt;/code&gt; event:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;coords.bind(&#39;DOMSubtreeModified&#39;, function() {
+
+  /*
+  TODO: Copy coordinates
+  */
+
+  // Close box
+  cross.click();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;My first approach to copy the contents was using &lt;code&gt;document.execCommand(&#39;copy&#39;)&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;coords.bind(&#39;DOMSubtreeModified&#39;, function() {
+  jQuery(this).select();
+
+  try {
+    // Always false :(
+    var success = document.execCommand(&#39;copy&#39;);
+    if (!success) {
+      console.error(&#39;could not be copied&#39;);
+    }
+  } catch(err) {
+    console.error(&#39;Oops, unable to copy&#39;);
+    console.error(err);
+  }
+
+  // Close box
+  cross.click();
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But, &lt;strong&gt;&lt;code&gt;document.execCommand&lt;/code&gt; does not work on DeveloperTools&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;After spending a while researching, I found out that Chrome exposes the &lt;code&gt;copy(&#39;text&#39;)&lt;/code&gt; function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;coords.bind(&#39;DOMSubtreeModified&#39;, function() {
+  // Get text
+  var text = jQuery(this).text();
+
+  // Copy coordinates to clipboard :)
+  copy(text);
+
+  // Display to console
+  console.log(text);
+
+  // Close box
+  cross.click();
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;result:0b9061f9c618b2025873ec399dede6d4&#34;&gt;Result&lt;/h3&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/googlemaps-result.gif&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h4 id=&#34;full-code:0b9061f9c618b2025873ec399dede6d4&#34;&gt;Full Code&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;// Inject jQuery
+var script = document.createElement(&#39;script&#39;);
+script.src = &amp;quot;//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js&amp;quot;;
+document.getElementsByTagName(&#39;head&#39;)[0].appendChild(script);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Wait a second here&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-javascript&#34;&gt;
+// Get coordinates &amp;lt;a&amp;gt; object
+var coords = jQuery(&#39;#reveal-card &amp;gt; div &amp;gt; div.widget-reveal-card-container &amp;gt; a&#39;)
+
+// Get close button
+var cross = jQuery(&#39;#reveal-card &amp;gt; div &amp;gt; button.widget-reveal-card-close&#39;)
+
+// Add actions
+coords.bind(&#39;DOMSubtreeModified&#39;, function() {
+  // Get text
+  var text = jQuery(this).text();
+
+  // Copy coordinates to clipboard
+  copy(text);
+
+  // Display to console
+  console.log(text);
+
+  // Close box
+  cross.click();
+});
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

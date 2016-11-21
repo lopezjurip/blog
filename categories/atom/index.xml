@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Atom on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/atom/</link>
+    <description>Recent content in Atom on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Dec 2015 23:55:08 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/atom/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>LaTeX and Markdown spell check in Atom</title>
+      <link>https://blog.lopezjuri.com/2015/12/29/latex-and-markdown-spell-check-in-atom/</link>
+      <pubDate>Tue, 29 Dec 2015 23:55:08 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/29/latex-and-markdown-spell-check-in-atom/</guid>
+      <description>
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/atom-spellcheck.gif&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;I use Atom for everything. In the last days, I have wrote a lot of text in Markdown and LaTeX, but english is not my main language so I spend some time searching lint tools and plugins to help me out.&lt;/p&gt;
+
+&lt;p&gt;Atoms comes with a spell-check plugin, but it does not lint every file type.&lt;/p&gt;
+
+&lt;p&gt;To enable Markdown and LaTeX:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;text.tex.latex, source.gfm
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/atom-spellcheck-settings.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;CMD+SHIFT+.&lt;/code&gt; to show the suggestions&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>C Development Environment with Atom on OSX</title>
+      <link>https://blog.lopezjuri.com/2015/12/29/c-development-environment-with-atom-on-osx/</link>
+      <pubDate>Tue, 29 Dec 2015 22:44:57 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/29/c-development-environment-with-atom-on-osx/</guid>
+      <description>
+
+&lt;p&gt;There is two kind of people: You love &lt;code&gt;vim&lt;/code&gt; or you hate &lt;code&gt;vim&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Therefore I use &lt;a href=&#34;https://atom.io/&#34;&gt;Atom&lt;/a&gt; 💗.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-atom:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;Install Atom&lt;/h2&gt;
+
+&lt;p&gt;Use &lt;a href=&#34;http://brew.sh/&#34;&gt;Homebrew&lt;/a&gt;!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, install &lt;a href=&#34;http://caskroom.io/&#34;&gt;Homebrew Cask&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew tap caskroom/cask
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, install Atom:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew cask install atom
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;plugins:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;Plugins&lt;/h2&gt;
+
+&lt;h3 id=&#34;autocomplete-clang-https-atom-io-packages-autocomplete-clang:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;&lt;a href=&#34;https://atom.io/packages/autocomplete-clang&#34;&gt;autocomplete-clang&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;We will install &lt;code&gt;autocomplete-clang&lt;/code&gt;, but first we need to install &lt;code&gt;clang&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew install llvm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See if &lt;code&gt;clang&lt;/code&gt; was installed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;clang -v
+# Apple LLVM version 7.0.2 (clang-700.1.81)
+# Target: x86_64-apple-darwin15.2.0
+# Thread model: posix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, install the package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apm install autocomplete-clang
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;linter-clang-https-atom-io-packages-linter-clang:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;&lt;a href=&#34;https://atom.io/packages/linter-clang&#34;&gt;linter-clang&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Lint your code with &lt;a href=&#34;https://atom.io/users/AtomLinter&#34;&gt;AtomLinter&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Make sure you have installed &lt;a href=&#34;https://github.com/atom-community/linter&#34;&gt;&lt;code&gt;linter&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apm install linter
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apm install linter-clang
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;atom-beautify-https-atom-io-packages-atom-beautify:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;&lt;a href=&#34;https://atom.io/packages/atom-beautify&#34;&gt;atom-beautify&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;To format our C code (and C++, Objective-C, etc) and fix all those linter&amp;rsquo;s warnings, we need &lt;a href=&#34;http://sourceforge.net/projects/uncrustify&#34;&gt;uncrustify&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew install uncrustify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apm install uncrustify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s it! 🎉&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/c-development.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;My theme is: &lt;a href=&#34;https://atom.io/themes/atom-material-ui&#34;&gt;Atom Material&lt;/a&gt; + &lt;a href=&#34;https://atom.io/themes/duotone-dark-syntax&#34;&gt;DuoTone dark&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

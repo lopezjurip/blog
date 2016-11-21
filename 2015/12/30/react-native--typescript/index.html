@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>React Native &#43; Typescript &middot; Patricio López J.</title>
+
+  
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-x.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/highlight/railscasts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.lopezjuri.com/touch-icon-144-precomposed.png">
+  <link href="https://blog.lopezjuri.com/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="How to write a React Native app using Typescript">
+  <meta name="keywords" content="mobile,react-native,typescript">
+  <link rel="author" href="http://plus.google.com/105711235388160251353">
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+        <img src="https://www.gravatar.com/avatar/dc6b7d7fbef65eda1ce854dbe02f8db3?s=200"
+             alt="gravatar" title="Patricio López J.">
+      
+      <h1>Patricio López J.</h1>
+      <p class="lead">Full-stack developer from Chile</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/">Blog</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/mrpatiwi"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://bitbucket.org/mrpatiwi"><i class="fa fa-bitbucket-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/lopezjuri"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/MrPatiwi"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="https://blog.lopezjuri.com/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2016 <a href="https://blog.lopezjuri.com/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1>React Native &#43; Typescript</h1>
+    <span class="post-date">Dec 30, 2015 &middot; 4 minute read &middot; <a href="https://blog.lopezjuri.com/2015/12/30/react-native--typescript/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://blog.lopezjuri.com/categories/mobile">mobile</a><a class="label" href="https://blog.lopezjuri.com/categories/react-native">react-native</a><a class="label" href="https://blog.lopezjuri.com/categories/typescript">typescript</a>
+    </span>
+    
+
+<p><a href="https://facebook.github.io/react-native">React-Native</a> is a big deal, you should try it.</p>
+
+<p>By default, it comes with <a href="http://flowtype.org">Flow</a> support, but in this case we will setup a project using <a href="http://www.typescriptlang.org">Typescript</a>. It&rsquo;s awesome how Typescript increases in popularity thanks to projects like <a href="https://angular.io">Angular2</a> and how all the community maintains the typings.</p>
+
+<blockquote>
+<p>See the complete project and more complex code on: <a href="https://github.com/mrpatiwi/ReactNativeTS"><strong>github.com/mrpatiwi/ReactNativeTS</strong></a></p>
+</blockquote>
+
+<h2 id="requirements:7303417269c8a820a1613a3c6647d5b4">Requirements</h2>
+
+<p>Follow the official requirements on <a href="https://facebook.github.io/react-native/docs/getting-started.html#requirements">facebook.github.io/react-native/docs/getting-started.html#requirements</a>.</p>
+
+<h3 id="setup:7303417269c8a820a1613a3c6647d5b4">Setup</h3>
+
+<p>Install <a href="http://brew.sh">Homebrew</a>:</p>
+
+<pre><code class="language-sh">ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre>
+
+<p>Install <a href="https://github.com/creationix/nvm">nvm</a> (Node Version Manager):</p>
+
+<pre><code class="language-sh">brew update &amp;&amp; brew install nvm
+mkdir ~/.nvm
+</code></pre>
+
+<p>Add this to your <code>~/.bash_profile</code> or <code>~/.zshconfig</code>:</p>
+
+<pre><code class="language-sh">export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+</code></pre>
+
+<p>Install the lastest version of Node:</p>
+
+<pre><code class="language-sh">nvm install node &amp;&amp; nvm alias default node
+</code></pre>
+
+<p>Install Facebook&rsquo;s <code>watchman</code>:</p>
+
+<pre><code class="language-sh">brew install watchman
+</code></pre>
+
+<p>Install <code>react-native-cli</code>, Typescript and <a href="https://github.com/DefinitelyTyped/tsd">DefinitelyTyped/tsd</a>:</p>
+
+<pre><code class="language-sh">npm install -g react-native-cli typescript tsd
+</code></pre>
+
+<h2 id="init-project:7303417269c8a820a1613a3c6647d5b4">Init Project</h2>
+
+<p>Let&rsquo;s create a project named <code>ReactNativeTS</code>:</p>
+
+<pre><code class="language-sh">react-native init ReactNativeTS
+</code></pre>
+
+<p>We will remove <code>.flowconfig</code>:</p>
+
+<pre><code class="language-sh">rm .flowconfig
+</code></pre>
+
+<h2 id="init-typescript-settings:7303417269c8a820a1613a3c6647d5b4">Init Typescript settings</h2>
+
+<p>This will create:</p>
+
+<ul>
+<li><code>tsconfig.json</code>: Settings to tell Typescript how to <em>compile</em> our code.</li>
+<li><code>tsd.json</code>: Typings version manager</li>
+</ul>
+
+<pre><code class="language-sh">tsd init &amp;&amp; tsc --init
+</code></pre>
+
+<p>We will modify <code>tsconfig.json</code> and set it as:</p>
+
+<pre><code class="language-json">{
+    &quot;compilerOptions&quot;: {
+        &quot;target&quot;: &quot;es6&quot;,
+        &quot;jsx&quot;: &quot;react&quot;,
+        &quot;noImplicitAny&quot;: true,
+        &quot;experimentalDecorators&quot;: true,
+        &quot;preserveConstEnums&quot;: true,
+        &quot;outDir&quot;: &quot;built&quot;,
+        &quot;rootDir&quot;: &quot;src&quot;,
+        &quot;sourceMap&quot;: true
+    },
+    &quot;filesGlob&quot;: [
+        &quot;typings/**/*.d.ts&quot;,
+        &quot;src/**/*.ts&quot;,
+        &quot;src/**/*.tsx&quot;
+    ],
+    &quot;exclude&quot;: [
+        &quot;node_modules&quot;
+    ],
+    &quot;compileOnSave&quot;: false
+}
+</code></pre>
+
+<blockquote>
+<ul>
+<li>We will compile to ES6 (ES2015).</li>
+<li>Use React support</li>
+<li>The input code have to be placed at <code>src</code>.</li>
+<li>The output code will be placed at <code>built</code></li>
+<li><code>compileOnSave</code> is for your IDE, in my case Atom.</li>
+</ul>
+</blockquote>
+
+<p><strong>Make sure to add <code>built</code> to your <code>.gitignore</code></strong>:</p>
+
+<pre><code class="language-gitignore"># .gitignore
+
+# Typescript Output
+built
+</code></pre>
+
+<h3 id="dependencies:7303417269c8a820a1613a3c6647d5b4">Dependencies</h3>
+
+<p>Let&rsquo;s install some dependencies:</p>
+
+<pre><code class="language-sh">npm install --save-dev typescript gulp gulp-typescript concurrently
+</code></pre>
+
+<ul>
+<li><a href="http://gulpjs.com"><code>gulp</code></a> as our building system.</li>
+<li><a href="https://www.npmjs.com/package/concurrently"><code>concurrently</code></a> so we can watch and have started the ReactNative in the same terminal session.</li>
+</ul>
+
+<h2 id="gulpfile:7303417269c8a820a1613a3c6647d5b4">Gulpfile</h2>
+
+<p>Now, we have to setup the <code>gulpfile.js</code> to declare our build pipeline:</p>
+
+<pre><code class="language-js">var gulp = require('gulp');
+var ts = require('gulp-typescript');
+
+// Grab settings from tsconfig.json
+var tsProject = ts.createProject('tsconfig.json');
+
+gulp.task('build', function() {
+    var tsResult = tsProject.src().pipe(ts(tsProject));
+    return tsResult.js.pipe(gulp.dest('built'));
+});
+
+gulp.task('watch', ['build'], function() {
+  gulp.watch('src/**/*.ts', ['build']);
+  gulp.watch('src/**/*.tsx', ['build']);
+});
+
+gulp.task('default', ['build']);
+</code></pre>
+
+<p>Now we have the following available on the command line:</p>
+
+<ul>
+<li><code>gulp build</code>: Take all the Typescript code and produces the <code>.js</code> code.</li>
+<li><code>gulp watch</code>: Every change on a <code>.ts</code> or <code>.tsx</code> file will trigger <code>gulp build</code>.</li>
+</ul>
+
+<h2 id="typings:7303417269c8a820a1613a3c6647d5b4">Typings</h2>
+
+<p>Let&rsquo;s install the typings we need:</p>
+
+<pre><code class="language-sh">tsd install --save react-native
+</code></pre>
+
+<p>This will update the <code>tsd.json</code> like this:</p>
+
+<pre><code class="language-json">
+{
+  &quot;version&quot;: &quot;v4&quot;,
+  &quot;repo&quot;: &quot;borisyankov/DefinitelyTyped&quot;,
+  &quot;ref&quot;: &quot;master&quot;,
+  &quot;path&quot;: &quot;typings&quot;,
+  &quot;bundle&quot;: &quot;typings/tsd.d.ts&quot;,
+  &quot;installed&quot;: {
+    &quot;react-native/react-native.d.ts&quot;: {
+      &quot;commit&quot;: &quot;dc9dabe74a5be62613b17a3605309783a12ff28a&quot;
+    },
+    &quot;react/react.d.ts&quot;: {
+      &quot;commit&quot;: &quot;dc9dabe74a5be62613b17a3605309783a12ff28a&quot;
+    }
+  }
+}
+</code></pre>
+
+<p>And the <code>typings</code> directory as:</p>
+
+<pre><code class="language-txt">ReactNativeTS
+└── typings
+    ├── react-native
+    ├── react
+    └── tsd.d.ts
+</code></pre>
+
+<h2 id="hello-world:7303417269c8a820a1613a3c6647d5b4">Hello world</h2>
+
+<p>Let&rsquo;s modify the entry points of the app:</p>
+
+<pre><code class="language-js">// index.ios.js
+
+'use strict'
+
+import { AppRegistry } from 'react-native'
+import App from './built'
+
+AppRegistry.registerComponent('ReactNativeTS', () =&gt; App)
+</code></pre>
+
+<pre><code class="language-js">// index.android.js
+
+'use strict'
+
+import { AppRegistry } from 'react-native'
+import App from './built'
+
+AppRegistry.registerComponent('ReactNativeTS', () =&gt; App)
+</code></pre>
+
+<p>Yes, they are identical. React-Native automatically picks the <code>.android</code> or <code>.ios</code> file from a local dependency, in this case the <code>index.js</code> of <code>build</code>.</p>
+
+<h3 id="typescript-files:7303417269c8a820a1613a3c6647d5b4">Typescript files</h3>
+
+<p>Let&rsquo;s convert the default hello world page to <code>.tsx</code>, we will start with the iOS part:</p>
+
+<p>Import dependencies:</p>
+
+<pre><code class="language-tsx">// src/index.ios.tsx
+
+/// &lt;reference path=&quot;../typings/tsd.d.ts&quot;/&gt;
+
+import React from &quot;react-native&quot;;
+const { StyleSheet, Text, View } = React;
+</code></pre>
+
+<p>The <code>style</code> remains the same:</p>
+
+<pre><code class="language-tsx">const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: &quot;center&quot;,
+        alignItems: &quot;center&quot;,
+        backgroundColor: &quot;#F5FCFF&quot;,
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: &quot;center&quot;,
+        margin: 10,
+    },
+    instructions: {
+        textAlign: &quot;center&quot;,
+        color: &quot;#333333&quot;,
+        marginBottom: 5,
+    },
+});
+</code></pre>
+
+<p>And the <code>App</code> class will be like this:</p>
+
+<pre><code class="language-tsx">// We are exporting it
+export default class App extends React.Component&lt;any, any&gt; {
+    render() {
+        return (
+            &lt;View style={styles.container}&gt;
+                &lt;Text style={styles.welcome}&gt;
+                    Welcome to React Native
+                &lt;/Text&gt;
+                &lt;Text style={styles.instructions}&gt;
+                    To get started, edit index.ios.js
+                &lt;/Text&gt;
+                &lt;Text style={styles.instructions}&gt;
+                    Press Cmd+R to reload, {&quot;\n&quot;}
+                    Cmd+D or shake for dev menu
+                &lt;/Text&gt;
+            &lt;/View&gt;
+        );
+    }
+}
+</code></pre>
+
+<p>The <code>src/index.android.tsx</code> is very similar:</p>
+
+<pre><code class="language-tsx">// src/index.android.tsx
+
+/// &lt;reference path=&quot;../typings/tsd.d.ts&quot;/&gt;
+
+import React from &quot;react-native&quot;;
+const { StyleSheet, Text, View } = React;
+
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: &quot;center&quot;,
+        alignItems: &quot;center&quot;,
+        backgroundColor: &quot;#F5FCFF&quot;,
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: &quot;center&quot;,
+        margin: 10,
+    },
+    instructions: {
+        textAlign: &quot;center&quot;,
+        color: &quot;#333333&quot;,
+        marginBottom: 5,
+    },
+});
+
+
+export default class App extends React.Component&lt;any, any&gt; {
+    render() {
+        return (
+            &lt;View style={styles.container}&gt;
+                &lt;Text style={styles.welcome}&gt;
+                    Welcome to React Native!
+                &lt;/Text&gt;
+                &lt;Text style={styles.instructions}&gt;
+                    To get started, edit index.android.js
+                &lt;/Text&gt;
+                &lt;Text style={styles.instructions}&gt;
+                    Shake or press menu button for dev menu
+                &lt;/Text&gt;
+            &lt;/View&gt;
+        );
+    }
+}
+</code></pre>
+
+<h2 id="run-the-app:7303417269c8a820a1613a3c6647d5b4">Run the app</h2>
+
+<p>I recommend adding this scripts to <code>package.json</code>:</p>
+
+<pre><code class="language-json">&quot;scripts&quot;: {
+    &quot;build&quot;: &quot;gulp build&quot;,
+    &quot;watch&quot;: &quot;gulp watch&quot;,
+    &quot;start&quot;: &quot;concurrent \&quot;npm run watch\&quot; \&quot;node node_modules/react-native/local-cli/cli.js start\&quot; &quot;,
+    &quot;android&quot;: &quot;adb reverse tcp:8081 tcp:8081 &amp;&amp; react-native run-android&quot;
+}
+</code></pre>
+
+<p>Run it!:</p>
+
+<pre><code class="language-sh">npm start
+</code></pre>
+
+
+<figure >
+    
+        <img src="/images/reactnativets-terminal.png" />
+    
+    
+</figure>
+
+
+<h2 id="see-the-result:7303417269c8a820a1613a3c6647d5b4">See the result</h2>
+
+<h3 id="ios:7303417269c8a820a1613a3c6647d5b4">iOS</h3>
+
+<p>Open <code>ios/ReactNativeTS.xcodeproj</code> with XCode and press play.</p>
+
+
+<figure >
+    
+        <img src="/images/reactnativets-ios.png" />
+    
+    
+</figure>
+
+
+<h3 id="android:7303417269c8a820a1613a3c6647d5b4">Android</h3>
+
+<p>See <a href="https://facebook.github.io/react-native/docs/android-setup.html">facebook.github.io/react-native/docs/android-setup.html</a>.</p>
+
+
+<figure >
+    
+        <img src="/images/reactnativets-android.png" />
+    
+    
+</figure>
+
+
+<h1 id="conclusions:7303417269c8a820a1613a3c6647d5b4">Conclusions</h1>
+
+<p>We can see that it&rsquo;s 100% possible to write React-Native apps with Typescript.</p>
+
+<p>The problem comes with maintainability, because the React-Native team is moving fast and the typings will not have official support.</p>
+
+<p>Maybe it&rsquo;s better to stick with Flow.</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "blog-lopezjuri";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "blog-lopezjuri";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://blog.lopezjuri.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  var _gaq=[['_setAccount','UA-57934557-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+

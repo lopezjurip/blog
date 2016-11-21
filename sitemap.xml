@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/</loc>
+    <lastmod>2016-11-20T21:11:12-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/11/20/comentarios-sobre-a-survey-of-poi-recommendation/</loc>
+    <lastmod>2016-11-20T21:11:12-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/11/14/comentarios-sobre-a-new-approach-to-evaluating-novel-recommendations/</loc>
+    <lastmod>2016-11-14T00:59:29-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/11/06/comentarios-sobre-the-link-prediction-problem-for-social-networks/</loc>
+    <lastmod>2016-11-06T22:36:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/10/23/comentarios-sobre-a-survey-of-active-learning-in-cf-recommender-systems/</loc>
+    <lastmod>2016-10-23T21:06:15-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/10/15/comentarios-sobre-recommender-systems-from-algorithms-to-user-experience/</loc>
+    <lastmod>2016-10-15T09:59:42-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/09/25/comentarios-sobre-implicit-feedback/</loc>
+    <lastmod>2016-09-25T22:39:03-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/09/18/comentarios-sobre-context-aware/</loc>
+    <lastmod>2016-09-18T22:23:28-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/09/11/comentarios-sobre-hybrid-recommender-systems/</loc>
+    <lastmod>2016-09-11T22:42:30-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/09/10/comentarios-sobre-matrix-factorization-techniques/</loc>
+    <lastmod>2016-09-10T21:22:52-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/09/04/comentarios-sobre-content-based-recommendation-systems/</loc>
+    <lastmod>2016-09-04T23:13:27-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/09/04/comentarios-sobre-collaborative-filtering-for-social-tagging-systems/</loc>
+    <lastmod>2016-09-04T21:18:51-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/08/28/comentarios-sobre-sources-of-knowledge-and-evaluation-metrics/</loc>
+    <lastmod>2016-08-28T23:17:24-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-item-based-cf/</loc>
+    <lastmod>2016-08-21T23:36:39-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-slope-one/</loc>
+    <lastmod>2016-08-21T23:21:45-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-filtrado-colaborativo-de-herlocker-j./</loc>
+    <lastmod>2016-08-21T23:08:03-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2016/08/14/comentarios-sobre-c%C3%B3mo-hacker-news-ordena-las-noticias/</loc>
+    <lastmod>2016-08-14T09:24:52-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2015/12/30/react-native--typescript/</loc>
+    <lastmod>2015-12-30T09:01:44-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2015/12/29/latex-and-markdown-spell-check-in-atom/</loc>
+    <lastmod>2015-12-29T23:55:08-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2015/12/29/python-2--3-quick-server/</loc>
+    <lastmod>2015-12-29T23:24:32-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2015/12/29/c-development-environment-with-atom-on-osx/</loc>
+    <lastmod>2015-12-29T22:44:57-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2015/12/29/mounting-go-revel-api--mongodb-on-docker/</loc>
+    <lastmod>2015-12-29T16:16:50-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2015/12/28/get-googlemaps.com-coordinates-to-clipboard-on-click/</loc>
+    <lastmod>2015-12-28T12:46:08-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/2015/12/28/setup-python-3--git-on-windows-10/</loc>
+    <lastmod>2015-12-28T12:08:21-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/about/</loc>
+    <lastmod>2015-12-20T23:13:22-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://blog.lopezjuri.com/license/</loc>
+    <lastmod>2015-12-20T22:59:44-03:00</lastmod>
+  </url>
+  
+</urlset>

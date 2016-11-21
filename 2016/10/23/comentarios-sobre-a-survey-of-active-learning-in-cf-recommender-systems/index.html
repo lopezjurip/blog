@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Comentarios sobre A survey of active learning in CF recommender systems &middot; Patricio López J.</title>
+
+  
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-x.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/highlight/railscasts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.lopezjuri.com/touch-icon-144-precomposed.png">
+  <link href="https://blog.lopezjuri.com/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="author" href="http://plus.google.com/105711235388160251353">
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+        <img src="https://www.gravatar.com/avatar/dc6b7d7fbef65eda1ce854dbe02f8db3?s=200"
+             alt="gravatar" title="Patricio López J.">
+      
+      <h1>Patricio López J.</h1>
+      <p class="lead">Full-stack developer from Chile</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/">Blog</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/mrpatiwi"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://bitbucket.org/mrpatiwi"><i class="fa fa-bitbucket-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/lopezjuri"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/MrPatiwi"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="https://blog.lopezjuri.com/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2016 <a href="https://blog.lopezjuri.com/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1>Comentarios sobre A survey of active learning in CF recommender systems</h1>
+    <span class="post-date">Oct 23, 2016 &middot; 2 minute read &middot; <a href="https://blog.lopezjuri.com/2016/10/23/comentarios-sobre-a-survey-of-active-learning-in-cf-recommender-systems/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://blog.lopezjuri.com/categories/recsys">recsys</a>
+    </span>
+    
+
+<p>Otro paper que hace un resumen del estado actual de los sistemas recomendadores.</p>
+
+<h2 id="aprendizaje-activo:40f10657e85800594403cc71c9abf9e5">Aprendizaje Activo</h2>
+
+<p>Este le da énfasis a lo que es el <em>Active Learning</em>, que corresponde a la funcionalidad de un sistema recomendador que ayuda a mejorar las recomendaciones. El fin es poder de solucionar en parte el problema del <em>Cold Start</em> y la falta de datos.</p>
+
+<p>Es importante mencionar que esto ocurre Online y preguntándole al usuario sobre su gusto sobre ciertos ítems que el sistema considera importantes para mejorar las recomendaciones. Idealmente, preguntándole de manera personalizada a cada usuario y no preguntarle a todos lo mismo, con el fin de obtener resultados más <em>finos</em>.</p>
+
+<h2 id="estrategias:40f10657e85800594403cc71c9abf9e5">Estrategias</h2>
+
+<p>Dentro de las estrategias, me llama la atención que aparecen conceptos de <em>Minería de Datos</em> como <em><strong>Information Gain</strong> through Clustered Neighbours (IGCN)</em> y <em>Decision Tree</em>. Hace bastante sentido, pues queremos obtener la mayor información posible del usuario (ganancia de información) con la menor cantidad de preguntas. También que podemos clasificar a un usuario con un árbol de decisión en base a <em>pruebas</em> sobre sus gustos.</p>
+
+<p>Lo que más destaco es que mencionan la posibilidad de <strong>aplicar diversas estrategias sobre grupos distintos de usuarios</strong>, con el fin de encontrar la mejor estrategia para ellos. Esto es casi como <em>&ldquo;recomendarles la mejor estrategia recomendadora&rdquo;</em>. Esto es muy aplicable hoy en día usando <em>A/B Testing</em>.</p>
+
+<h3 id="offline-vs-online:40f10657e85800594403cc71c9abf9e5">Offline vs Online</h3>
+
+<p>También se discute las diferencias entre sistemas <em>offline</em> (que se entrenan y prueban dentro de un entorno <em>científico</em>) versus los <em>online</em> que corren en producción con usuario reales. Si bien trata el tema a favor de <em>online</em> por ser más fiel a la realidad, todavía no veo implementaciones, ideas, sugerencias y/o recomendaciones de como llevarlos a la realidad.</p>
+
+<h2 id="críticas-finales:40f10657e85800594403cc71c9abf9e5">Críticas finales</h2>
+
+<p>En primer lugar la tabla <code>Table 1 – Performance comparison of active learning strategies</code> no deja explícito el criterio para decir que un algoritmo es <em>Very good</em>, <em>Good</em>, o <em>Poor</em> bajo ciertas métricas.</p>
+
+<p><strong>Finalmente me parece extraño que el artículo sea de este año (2016) y se siga hablando de técnicas y algoritmos de hace 10-15 años.</strong> Hace mención de técnicas como <a href="https://en.wikipedia.org/wiki/Reinforcement_learning"><em>aprendizaje reforzado</em></a>, pero yo esperaría más profundidad en <a href="https://es.wikipedia.org/wiki/Red_neuronal_artificial">redes neuronales</a> y <a href="https://en.wikipedia.org/wiki/TensorFlow">tensores</a> ya a estas alturas.</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "blog-lopezjuri";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "blog-lopezjuri";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://blog.lopezjuri.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  var _gaq=[['_setAccount','UA-57934557-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+

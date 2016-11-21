@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recsys on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/recsys/</link>
+    <description>Recent content in Recsys on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 20 Nov 2016 21:11:12 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/recsys/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Comentarios sobre A Survey of POI recommendation</title>
+      <link>https://blog.lopezjuri.com/2016/11/20/comentarios-sobre-a-survey-of-poi-recommendation/</link>
+      <pubDate>Sun, 20 Nov 2016 21:11:12 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/11/20/comentarios-sobre-a-survey-of-poi-recommendation/</guid>
+      <description>
+
+&lt;p&gt;El &lt;em&gt;paper&lt;/em&gt; nos hace un recuento de cómo se están haciendo las recomendaciones en base a puntos de interés (&lt;em&gt;POI&lt;/em&gt;). Este tipo de recomendaciones se puede hacer parecer a las recomendaciones típicas que hacíamos con ítems, solo que hay que considerar otros factores como las distancias, las concentraciones de POI, factores sociales y el gran &lt;strong&gt;problema de la esparcicidad&lt;/strong&gt;, que para estos casos es más grave que antes.&lt;/p&gt;
+
+&lt;p&gt;Se habla de que estos problemas pueden dividirse en las siguientes categorias:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Pure check-in data based POI recommendation approaches.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Geographical influence enhanced POI recommendation approaches.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Social influence enhanced POI recommendation approaches.&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Temporal influence enhanced POI recommendation approaches.&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Si bien se dan hartas explicaciones de cómo aplican y sus limitantes, no se muestras resultados empíricos.&lt;/p&gt;
+
+&lt;h2 id=&#34;demasiados-factores:54411ba4c42b3a9f5052974f753fbd8e&#34;&gt;Demasiados factores&lt;/h2&gt;
+
+&lt;p&gt;Yo creo que el principal problema de estos &lt;em&gt;approaches&lt;/em&gt;, es que cuesta mezclarlos en un recomendador híbrido. Además sería muy costoso ir probando cuáles factores pesan más que los otros.&lt;/p&gt;
+
+&lt;p&gt;En este sentido, podría atacarse el problema con &lt;strong&gt;Redes Neuronales&lt;/strong&gt;. No soy experto en el tema, pero creo que con esta cantidad de factores podemos entrenar una red y abstraernos de toda implementación de los algoritmos y heurísticas con sesgos mostradas en el &lt;em&gt;paper&lt;/em&gt;. De esta forma los mismos datos podrían modelar el problema y las recomendaciones.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre A New Approach to Evaluating Novel Recommendations</title>
+      <link>https://blog.lopezjuri.com/2016/11/14/comentarios-sobre-a-new-approach-to-evaluating-novel-recommendations/</link>
+      <pubDate>Mon, 14 Nov 2016 00:59:29 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/11/14/comentarios-sobre-a-new-approach-to-evaluating-novel-recommendations/</guid>
+      <description>
+
+&lt;p&gt;El paper muestra dos métodos para evaluar qué tan novedoso son algunas recomendaciones.&lt;/p&gt;
+
+&lt;p&gt;La percepción de la &lt;em&gt;novedocidad&lt;/em&gt; es importante para el usuario porque da posibilidad a cierta espontaneidad y se percibe como más auténtica. La dificultad de esto es que cuesta balancearlo con la familiaridad y la relevancia de ítems a recomendar.&lt;/p&gt;
+
+&lt;h2 id=&#34;user-centric:abc4b0f15143af0d22c350f46f5ab87f&#34;&gt;User-centric&lt;/h2&gt;
+
+&lt;p&gt;Se critica a la metodología típica del &lt;em&gt;leave-n-out&lt;/em&gt; porque solo mide precisión y no qué tan útil es la información ni qué tan valiosa es.&lt;/p&gt;
+
+&lt;p&gt;Para medir esto último se necesita &lt;em&gt;feedback&lt;/em&gt; (explícito o implícito).&lt;/p&gt;
+
+&lt;h2 id=&#34;item-centric:abc4b0f15143af0d22c350f46f5ab87f&#34;&gt;Item-centric&lt;/h2&gt;
+
+&lt;p&gt;Si bien &lt;em&gt;Colaborative Filtering (CF)&lt;/em&gt; es afectado por la popularidad de los ítems, los usuarios perciben que las recomendaciones son de mejor calidad.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Finalmente, no se deja claro el valor o ecuación que permite calcular lo que se propuso el paper, sino que queda como a interpretación del que analice los resultados.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre The Link-Prediction Problem for Social Networks</title>
+      <link>https://blog.lopezjuri.com/2016/11/06/comentarios-sobre-the-link-prediction-problem-for-social-networks/</link>
+      <pubDate>Sun, 06 Nov 2016 22:36:00 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/11/06/comentarios-sobre-the-link-prediction-problem-for-social-networks/</guid>
+      <description>
+
+&lt;p&gt;El &lt;em&gt;paper&lt;/em&gt; se trata sobre &lt;em&gt;link-prediction&lt;/em&gt;, que es el problema de poder predecir si la generación de vinculos en una comunidad. El problema de este tipo de estudio es que &lt;strong&gt;las redes sociales son muy dinámicas&lt;/strong&gt;, versus los problemas de &lt;em&gt;ratings&lt;/em&gt; donde ocurren cambios pocas veces al pasar el tiempo. Este tipo de problemas se tratan en base a &lt;em&gt;snapshots&lt;/em&gt; de la red modelada como un grafo para un tiempo &lt;code&gt;t&lt;/code&gt; y se intenta predecir a futuro en base a sus características implícitas.&lt;/p&gt;
+
+&lt;h2 id=&#34;relaciones:4d66698a9fdd0ac83aa09bde38f588d2&#34;&gt;Relaciones&lt;/h2&gt;
+
+&lt;p&gt;Lo que si es discutible, es que trata toda interacción dentro del tiempo de igual forma o sin depender de interacciones pasadas. Podríamos decir que es &lt;em&gt;naive&lt;/em&gt; en este sentido y que el problema podría extenderse a evaluar la efectividad de los vínculos.&lt;/p&gt;
+
+&lt;p&gt;Por ejemplo, si llega a existir un vínculo entre dos nodos y sus futuras interacciones ocurren entre largos periodos de tiempo, quizás este vínculo es &lt;em&gt;débil&lt;/em&gt;. Por otro lado, si ocurren con más frecuencia en intervalos más cortos, quizás el vínculo es más &lt;em&gt;fuerte&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Podría modelarse le problema como un grafo donde las aristas sean el tiempo que transcurre para que dos nodos interactuen (habrían &lt;code&gt;n&lt;/code&gt; aristas entre pares de nodos). Aunque habría que probar si vale la pena usar algún algoritmo relacionado con las distancias, pues en la &lt;em&gt;Figura 6 y 7&lt;/em&gt; del paper se ve que el rendimiento de algo así podría ser no bueno.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre A survey of active learning in CF recommender systems</title>
+      <link>https://blog.lopezjuri.com/2016/10/23/comentarios-sobre-a-survey-of-active-learning-in-cf-recommender-systems/</link>
+      <pubDate>Sun, 23 Oct 2016 21:06:15 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/10/23/comentarios-sobre-a-survey-of-active-learning-in-cf-recommender-systems/</guid>
+      <description>
+
+&lt;p&gt;Otro paper que hace un resumen del estado actual de los sistemas recomendadores.&lt;/p&gt;
+
+&lt;h2 id=&#34;aprendizaje-activo:40f10657e85800594403cc71c9abf9e5&#34;&gt;Aprendizaje Activo&lt;/h2&gt;
+
+&lt;p&gt;Este le da énfasis a lo que es el &lt;em&gt;Active Learning&lt;/em&gt;, que corresponde a la funcionalidad de un sistema recomendador que ayuda a mejorar las recomendaciones. El fin es poder de solucionar en parte el problema del &lt;em&gt;Cold Start&lt;/em&gt; y la falta de datos.&lt;/p&gt;
+
+&lt;p&gt;Es importante mencionar que esto ocurre Online y preguntándole al usuario sobre su gusto sobre ciertos ítems que el sistema considera importantes para mejorar las recomendaciones. Idealmente, preguntándole de manera personalizada a cada usuario y no preguntarle a todos lo mismo, con el fin de obtener resultados más &lt;em&gt;finos&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;estrategias:40f10657e85800594403cc71c9abf9e5&#34;&gt;Estrategias&lt;/h2&gt;
+
+&lt;p&gt;Dentro de las estrategias, me llama la atención que aparecen conceptos de &lt;em&gt;Minería de Datos&lt;/em&gt; como &lt;em&gt;&lt;strong&gt;Information Gain&lt;/strong&gt; through Clustered Neighbours (IGCN)&lt;/em&gt; y &lt;em&gt;Decision Tree&lt;/em&gt;. Hace bastante sentido, pues queremos obtener la mayor información posible del usuario (ganancia de información) con la menor cantidad de preguntas. También que podemos clasificar a un usuario con un árbol de decisión en base a &lt;em&gt;pruebas&lt;/em&gt; sobre sus gustos.&lt;/p&gt;
+
+&lt;p&gt;Lo que más destaco es que mencionan la posibilidad de &lt;strong&gt;aplicar diversas estrategias sobre grupos distintos de usuarios&lt;/strong&gt;, con el fin de encontrar la mejor estrategia para ellos. Esto es casi como &lt;em&gt;&amp;ldquo;recomendarles la mejor estrategia recomendadora&amp;rdquo;&lt;/em&gt;. Esto es muy aplicable hoy en día usando &lt;em&gt;A/B Testing&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;offline-vs-online:40f10657e85800594403cc71c9abf9e5&#34;&gt;Offline vs Online&lt;/h3&gt;
+
+&lt;p&gt;También se discute las diferencias entre sistemas &lt;em&gt;offline&lt;/em&gt; (que se entrenan y prueban dentro de un entorno &lt;em&gt;científico&lt;/em&gt;) versus los &lt;em&gt;online&lt;/em&gt; que corren en producción con usuario reales. Si bien trata el tema a favor de &lt;em&gt;online&lt;/em&gt; por ser más fiel a la realidad, todavía no veo implementaciones, ideas, sugerencias y/o recomendaciones de como llevarlos a la realidad.&lt;/p&gt;
+
+&lt;h2 id=&#34;críticas-finales:40f10657e85800594403cc71c9abf9e5&#34;&gt;Críticas finales&lt;/h2&gt;
+
+&lt;p&gt;En primer lugar la tabla &lt;code&gt;Table 1 – Performance comparison of active learning strategies&lt;/code&gt; no deja explícito el criterio para decir que un algoritmo es &lt;em&gt;Very good&lt;/em&gt;, &lt;em&gt;Good&lt;/em&gt;, o &lt;em&gt;Poor&lt;/em&gt; bajo ciertas métricas.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Finalmente me parece extraño que el artículo sea de este año (2016) y se siga hablando de técnicas y algoritmos de hace 10-15 años.&lt;/strong&gt; Hace mención de técnicas como &lt;a href=&#34;https://en.wikipedia.org/wiki/Reinforcement_learning&#34;&gt;&lt;em&gt;aprendizaje reforzado&lt;/em&gt;&lt;/a&gt;, pero yo esperaría más profundidad en &lt;a href=&#34;https://es.wikipedia.org/wiki/Red_neuronal_artificial&#34;&gt;redes neuronales&lt;/a&gt; y &lt;a href=&#34;https://en.wikipedia.org/wiki/TensorFlow&#34;&gt;tensores&lt;/a&gt; ya a estas alturas.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Recommender systems: from algorithms to user experience</title>
+      <link>https://blog.lopezjuri.com/2016/10/15/comentarios-sobre-recommender-systems-from-algorithms-to-user-experience/</link>
+      <pubDate>Sat, 15 Oct 2016 09:59:42 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/10/15/comentarios-sobre-recommender-systems-from-algorithms-to-user-experience/</guid>
+      <description>
+
+&lt;p&gt;Este paper toca los temas relacionados con la experiencia del usuario y su percepción sobre el sistema recomendador. En este sentido, es un enfoque más aterrizado en su uso final y en su repercución en negocio del que implementa el sistema.&lt;/p&gt;
+
+&lt;h2 id=&#34;evaluaciones:82bfd1fdab6858c74435b541e7095914&#34;&gt;Evaluaciones&lt;/h2&gt;
+
+&lt;p&gt;De partida es difícil evaluar cómo los usuarios presienten una pieza de software. En primer lugar, en ellos existen varios sezgos personales y cuesta ser objetivos. En segundo lugar, es costo realizar mediciones y estudios, pues no es algo que se pueda programar y ejecutar cuantas veces se quiera, sino que requiere traer personas de verdad.&lt;/p&gt;
+
+&lt;p&gt;Algo que se usa hoy en día en entornos de producción es &lt;em&gt;A/B Testing&lt;/em&gt;. Esto es, a grupos de usuarios se les presenta distintas versiones de un software (sin que ellos sepan) y se realizan mediciones y análisis.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://es.wikipedia.org/wiki/Test_A/B&#34;&gt;https://es.wikipedia.org/wiki/Test_A/B&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;tags-descontroladas:82bfd1fdab6858c74435b541e7095914&#34;&gt;Tags descontroladas&lt;/h2&gt;
+
+&lt;p&gt;Algo anecdótico del paper, es que toca el problema que ocurre cuando se le deja al usuario crear tags. Ejemplo:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&amp;ldquo;Tarantino&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&amp;ldquo;Quentin Tarantino&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&amp;ldquo;tarantino is god&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Todas se refieren a lo mismo, pero es difícil identificar y corregir estos casos sin tener que leer manualmente el dataset. En el proyecto de &lt;em&gt;Minería de Datos&lt;/em&gt; de hace un año, con mi compañero tuvimos este mismo problema pero con las tags de canciones en &lt;a href=&#34;http://www.last.fm/&#34;&gt;last.fm&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;recommendaciones-grupales:82bfd1fdab6858c74435b541e7095914&#34;&gt;Recommendaciones grupales&lt;/h2&gt;
+
+&lt;p&gt;Destacaré la frase citada de &lt;em&gt;Masthoff y Gatt (2006)&lt;/em&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;rdquo; Is it better to make sure that one person is as happy as possible? Or to make sure that no person is too unhappy?&amp;ldquo;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Esto pues sirve puede servir para mi proyecto final del ramo.&lt;/p&gt;
+
+&lt;h2 id=&#34;rdf:82bfd1fdab6858c74435b541e7095914&#34;&gt;RDF&lt;/h2&gt;
+
+&lt;p&gt;Finalmente, se habla de explotar el contenido proporcionado por el usuario, por ejemplo los datos disponibles en &lt;a href=&#34;https://www.tripadvisor.com/&#34;&gt;tripadvisor.com&lt;/a&gt; y de combinarlos con más sitios.&lt;/p&gt;
+
+&lt;p&gt;En este sentido los trabajos que se están haciendo en la &lt;em&gt;web semántica&lt;/em&gt; con el fin de estandarizar las relaciones entre recursos (&lt;a href=&#34;https://www.w3.org/RDF/&#34;&gt;https://www.w3.org/RDF/&lt;/a&gt;) podría significar un gran avance en el área de los sistemas recomendadores. Pues podrían relacionarse &lt;em&gt;datasets&lt;/em&gt; distintos y con esto utilizar contexto, relaciones entre items, relaciones entre usuarios, opiniones sociales, temporalidad y más para generar recomendaciones.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Implicit Feedback</title>
+      <link>https://blog.lopezjuri.com/2016/09/25/comentarios-sobre-implicit-feedback/</link>
+      <pubDate>Sun, 25 Sep 2016 22:39:03 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/09/25/comentarios-sobre-implicit-feedback/</guid>
+      <description>&lt;p&gt;El paper trata sobre filtrado colaborativo, pero en vez de usar el clásico sistema de &lt;em&gt;ratings&lt;/em&gt;, se usa un sistema en base al &lt;em&gt;feedback&lt;/em&gt; que da el usuario de manera implícita. Esto es, obtener información del usuario del uso que le de al sistema o aplicación, como por ejemplo: el tiempo dedicado a escuchar una canción.&lt;/p&gt;
+
+&lt;p&gt;Se le da gran relevancia al rendimiento en términos de complejidad (lo que es bueno), particularmente al usar &lt;em&gt;factorizaciones matriciales&lt;/em&gt; en vez de &lt;em&gt;vecinos cercanos&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Sobre el experimento que realizan, me parece extraño que filtren las películas que los usuarios vieron hasta su 50% o menos. Luego se habla de &lt;em&gt;la incapacidad de obtener feedback negativo&lt;/em&gt;. En este sentido, el hecho de dejar un capítulo a medias por desinterés &lt;strong&gt;se podría considerar como una penalización a los similares al momento de recomendar.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;En un ámbito similar, el &lt;em&gt;paper&lt;/em&gt; &lt;strong&gt;&lt;em&gt;Signals in the Silence: Models of Implicit Feedback in a Recommendation System for Crowdsourcing&lt;/em&gt; &lt;em&gt;(2014)&lt;/em&gt;&lt;/strong&gt; de &lt;em&gt;Christopher H. Lin&lt;/em&gt;, &lt;em&gt;Ece Kamar&lt;/em&gt; y &lt;em&gt;Eric Horvitz&lt;/em&gt;; que es posterior al examinado en este &lt;em&gt;post&lt;/em&gt;, considera &lt;strong&gt;la exposición de un ítem&lt;/strong&gt; al momento de obtener &lt;em&gt;feedback negativo&lt;/em&gt;. Pues un elemento visible e ignorado nos da intuición e los intereses del usuario.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Context-Aware</title>
+      <link>https://blog.lopezjuri.com/2016/09/18/comentarios-sobre-context-aware/</link>
+      <pubDate>Sun, 18 Sep 2016 22:23:28 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/09/18/comentarios-sobre-context-aware/</guid>
+      <description>&lt;p&gt;El &lt;em&gt;paper&lt;/em&gt; parte introducción un problema para ese entonces de los sistemas recomendadores: &lt;strong&gt;se pierde el contexto y por ende, poder predictivo&lt;/strong&gt;. Posteriormente se hace un análisis sobre qué entendemos como &lt;em&gt;&amp;ldquo;contexto&amp;rdquo;&lt;/em&gt; y distintas formas de caracterizarlo. Este se presenta como un &lt;em&gt;&amp;ldquo;paseo&amp;rdquo;&lt;/em&gt; por las opciones que existen en esta área con casos reales e hipotéticos de su aplicación.&lt;/p&gt;
+
+&lt;p&gt;Dado el avance en tecnologías móviles, hoy en día el tema del contexto debe ser más relevante que para ese entonces. No solo es posible obtener más datos por culpa de la masificación de los celulares, sino que también mayor precisión.&lt;/p&gt;
+
+&lt;p&gt;Un tema que nunca trata es la &lt;em&gt;sparcity&lt;/em&gt; de los datos, en especial al momento de hablar de &lt;em&gt;Contextual modeling&lt;/em&gt;. Este se diferencia de los otros paradigmas que solo consideran los datos contextuales al momento de filtrar antes y/o después de las recomendaciones obtenidas por metodologías ya presentes en la literatura. En el caso del &lt;em&gt;Contextual modeling&lt;/em&gt;, se usa realmente los contextos como una dimensión más en el &lt;em&gt;dataset&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;También vale preguntarse qué tan separado es el tema del contexto fuera de lo que ya hemos visto en sistemas recomendadores. Pues podríamos representar el contexto como &lt;em&gt;features&lt;/em&gt;, incluso dentro de &lt;em&gt;implicit feedback&lt;/em&gt; podría entrar esta área.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Hybrid Recommender Systems</title>
+      <link>https://blog.lopezjuri.com/2016/09/11/comentarios-sobre-hybrid-recommender-systems/</link>
+      <pubDate>Sun, 11 Sep 2016 22:42:30 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/09/11/comentarios-sobre-hybrid-recommender-systems/</guid>
+      <description>&lt;p&gt;Encuentro bueno que el &lt;em&gt;paper&lt;/em&gt; parta comparando algunos métodos de recomendación con sus &lt;em&gt;pros&lt;/em&gt; y &lt;em&gt;contras&lt;/em&gt;, para luego hablar sobre recomendadores híbridos.&lt;/p&gt;
+
+&lt;p&gt;Increíble que Entree sea de los mediados de los 90&amp;rsquo;s y sea algo como lo que hoy en día es &lt;a href=&#34;https://es.foursquare.com/&#34;&gt;FourSquare&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Al parecer todavía está muy inmadura el área de recomendadores híbridos. Dada la naturaleza auto-dependiente de cada método en particular, deja mucho trabajo a nivel de decisión el cómo orquestar múltiples recomendadores al humano. Al final se convierte en un juego de probar, medir y volver a probar. Sin mencionar que aún falta considerar otros factores como sociales, temporales, etc.&lt;/p&gt;
+
+&lt;p&gt;Finalmente, el &lt;em&gt;paper&lt;/em&gt; es muy largo 😫 📚&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Matrix Factorization Techniques</title>
+      <link>https://blog.lopezjuri.com/2016/09/10/comentarios-sobre-matrix-factorization-techniques/</link>
+      <pubDate>Sat, 10 Sep 2016 21:22:52 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/09/10/comentarios-sobre-matrix-factorization-techniques/</guid>
+      <description>&lt;p&gt;El &lt;em&gt;paper&lt;/em&gt; trata sobre los modelos de filtrado colaborativo donde parte mencionando los métodos en &lt;em&gt;base a vecinos&lt;/em&gt;, junto con los problemas asociados a este.&lt;/p&gt;
+
+&lt;p&gt;Luego se habla de los métodos en base a &lt;em&gt;factores latentes&lt;/em&gt;. Aquí es donde entra las técnicas de factorización de matrices. Algunas ventajas de estos métodos son:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Se permite usar feedback implícito. Esto datos sobre acciones que realizan los usuarios pero que no las declaran consiente y explícitamente al sistema. Como las acciones de este estilo son más frecuentes que los actos de &lt;em&gt;ratear&lt;/em&gt; un elemento, la matriz de información que tenemos deja de ser tan &lt;em&gt;sparse&lt;/em&gt; 👌&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Escala mejor y es paralelizable (con &lt;em&gt;&amp;ldquo;alternating least squares&amp;rdquo;&lt;/em&gt; y bajo ciertas condiciones).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Un punto rescatable del texto, es que tratan el tema de la &lt;strong&gt;temporalidad&lt;/strong&gt;. Pues los gustos van cambiando y pueden ocurrir eventos externos que alteren la interacción típica de los usuarios a los ítems. Dejan esta opción de manera bastante general, cosa que uno pueda llegar e implementar las funciones en función al tiempo &lt;code&gt;t&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Algo que quizás no se toca en el tema del &lt;em&gt;feedback implícito&lt;/em&gt; es el &lt;strong&gt;problema de visibilidad&lt;/strong&gt;. Esto es: puede que algunos ítems tengan muy poca interacción, pero no por el hecho de que no sean interesantes, sino que están &lt;em&gt;&amp;ldquo;ocultos&amp;rdquo;&lt;/em&gt; o son de difícil acceso. Se necesitaría una especie de retroalimentación sobre la exposición de estos elementos y la interacción a estos, para incluirlo dentro de la ecuación que calcula los &lt;em&gt;ratings&lt;/em&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Content-Based Recommendation Systems</title>
+      <link>https://blog.lopezjuri.com/2016/09/04/comentarios-sobre-content-based-recommendation-systems/</link>
+      <pubDate>Sun, 04 Sep 2016 23:13:27 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/09/04/comentarios-sobre-content-based-recommendation-systems/</guid>
+      <description>&lt;p&gt;A modo de reseña, los sistemas recomendados basados en contenido analizan la descripción de los &lt;em&gt;items&lt;/em&gt; para buscar cuáles son de interés para el usuario.&lt;/p&gt;
+
+&lt;p&gt;¿Cómo los representamos?&lt;/p&gt;
+
+&lt;p&gt;Bueno si es texto libre, podemos tomar cada palabra y pasarla por un proceso de &lt;em&gt;stemming&lt;/em&gt; para considerarlas como &lt;em&gt;features&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Típicamente está el problema de que se pierde el contexto de las palabras. No obstante, me pregunto si los algoritmos de stemming están adaptados al rápido cambio del lenguaje. Pensemos que en Instagram los &lt;em&gt;emojis&lt;/em&gt; compiten con los caracteres alfanuméricos en cantidades.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://bits.blogs.nytimes.com/2015/05/01/the-rise-of-emoji-on-instagram-is-causing-language-repercussions/?_r=0&#34;&gt;The Rise of Emoji on Instagram Is Causing Language Repercussions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://instagram-engineering.tumblr.com/post/117889701472/emojineering-part-1-machine-learning-for-emoji&#34;&gt;Emojineering Part 1: Machine Learning for Emoji Trends&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;También está la opción de usar perfiles de usuario, vecinos cercanos, etc. Sin embargo me pareció interesante el algoritmo de &lt;em&gt;Rocchio&lt;/em&gt;: creo que hoy en día con lo avanzadas que son las interfaces gráficas para el usuario, se podría sacar harto provecho a este.&lt;/p&gt;
+
+&lt;p&gt;Si bien el paper es largo, deja gusto a poco porque no se llega a un final concluyente. Es como un paseo por lo que hay hasta ahora (ese entonces) de los recomendadores basados en contenido.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Collaborative Filtering for Social Tagging Systems</title>
+      <link>https://blog.lopezjuri.com/2016/09/04/comentarios-sobre-collaborative-filtering-for-social-tagging-systems/</link>
+      <pubDate>Sun, 04 Sep 2016 21:18:51 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/09/04/comentarios-sobre-collaborative-filtering-for-social-tagging-systems/</guid>
+      <description>&lt;p&gt;El &lt;em&gt;paper&lt;/em&gt; introduce los nuevos desafíos de los sistemas recomendados en base a etiquetas.&lt;/p&gt;
+
+&lt;p&gt;El gran cambio que producen es que los usuarios pueden dar información (poner etiquetas) que deben pasar por filtros de relevancia y calidad. &lt;strong&gt;Pues tienen la libertad de poner lo que se les de la gana.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;El objetivo es probar si este tipo de sistemas permite encontrar mejores usuarios similares y por ende, mejores recomendaciones.&lt;/p&gt;
+
+&lt;p&gt;Dentro de las medidas que se tomaron durante la preparación, fue buena idea normalizar las &lt;em&gt;tags&lt;/em&gt; y elegir más usuarios candidatos de los previstos para no sesgar las recomendaciones al área científica (&lt;em&gt;PAWS&lt;/em&gt;). En caso contrario, se hubiera trabajado con un &lt;em&gt;dataset&lt;/em&gt; muy &lt;em&gt;sparse&lt;/em&gt; y hubiera sido fácil encontrar vecinos, pues gran parte de los usuarios tendrían intereses comunes.&lt;/p&gt;
+
+&lt;p&gt;Quizás una variable a considerar en futuros trabajos es &lt;strong&gt;incorporar la relevancia de la tag al item&lt;/strong&gt;. Que quiero decir con esto:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Debería ser considerado de distinta manera que dos usuarios etiqueten un item con una etiqueta muy repetida a ese &lt;em&gt;item&lt;/em&gt;, versus una etiqueta poco común para el &lt;em&gt;item&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;El orden con que un usuario añade etiquetas a veces trae implícitamente su relevancia: las primeras suelen ser más relevantes que las últimas.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Sources of Knowledge and Evaluation Metrics</title>
+      <link>https://blog.lopezjuri.com/2016/08/28/comentarios-sobre-sources-of-knowledge-and-evaluation-metrics/</link>
+      <pubDate>Sun, 28 Aug 2016 23:17:24 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/08/28/comentarios-sobre-sources-of-knowledge-and-evaluation-metrics/</guid>
+      <description>
+
+&lt;p&gt;El paper de Denis Parra (&lt;em&gt;me pregunto quién será él&lt;/em&gt;) y Shaghayegh Sahebi es una especie de handbook para empezar a entender a los sistemas recomendadores.&lt;/p&gt;
+
+&lt;p&gt;El fin último de un sistema de este estilo es entregarle al usuario lo que necesita sin tener que preguntárselo.&lt;/p&gt;
+
+&lt;p&gt;Los tres principales tipos de sistemas recomendadores son:&lt;/p&gt;
+
+&lt;h3 id=&#34;basados-en-reglas:a45fca71233a9274e66e781c3afe3d04&#34;&gt;Basados en reglas&lt;/h3&gt;
+
+&lt;p&gt;Por lo general las reglas son definidas a mano y requieren que el usuario personalmente (y parcialmente) diga qué le gusta.&lt;/p&gt;
+
+&lt;p&gt;Esto en el mejor caso, cuando el usuario se anima a entregar su información.&lt;/p&gt;
+
+&lt;h3 id=&#34;basado-en-contenido:a45fca71233a9274e66e781c3afe3d04&#34;&gt;Basado en contenido&lt;/h3&gt;
+
+&lt;p&gt;Otra alternativa son los recomendadores en base al contenido de los ítems calificados.&lt;/p&gt;
+
+&lt;p&gt;Sin embargo estos pueden meter al usuario en una burbuja y siempre mostrarle lo mismo. Sin mencionar lo difícil que puede ser representar estos ítems a través de &lt;em&gt;features&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;en-base-a-la-colaboración:a45fca71233a9274e66e781c3afe3d04&#34;&gt;En base a la colaboración&lt;/h3&gt;
+
+&lt;p&gt;Consisten en buscar usuarios &amp;ldquo;semejantes&amp;rdquo; para recomendar las cosas que a ellos les gustan.&lt;/p&gt;
+
+&lt;p&gt;Lamentablemente estos no suelen escalar, existe el problema de la esparcicidad de los datos y los ítems nuevos pueden pasar ignorados.&lt;/p&gt;
+
+&lt;p&gt;Como en toda área del conocimiento, existe la opción de mezclar estas ideas en un sistema de &lt;strong&gt;recomendación híbrido&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;fuentes:a45fca71233a9274e66e781c3afe3d04&#34;&gt;Fuentes&lt;/h2&gt;
+
+&lt;p&gt;Por otra parte, hay que considerar las fuentes de información.&lt;/p&gt;
+
+&lt;p&gt;Están los &lt;em&gt;ratings&lt;/em&gt;, el &lt;em&gt;feedback implícito&lt;/em&gt;, las &lt;em&gt;etiquetas&lt;/em&gt; y las &lt;em&gt;redes sociales&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Un tema que quizás se habla poco es &lt;strong&gt;la invasión a la privacidad&lt;/strong&gt; al momento de obtener feedback implícito. Todos aceptamos la &lt;em&gt;política de privacidad&lt;/em&gt; de las aplicaciones sin cuestionarlas, no obstante esto expone mucho a la gente y su libertad.&lt;/p&gt;
+
+&lt;p&gt;Serán buenas fuentes de información, pero a nadie le gusta que lo estén constantemente mirando en todo lo que hace. Además, &lt;strong&gt;si el usuario común supiera esto transparentemente, quizás &lt;em&gt;&amp;ldquo;actuaría&amp;rdquo;&lt;/em&gt; distinto.&lt;/strong&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Item-Based CF</title>
+      <link>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-item-based-cf/</link>
+      <pubDate>Sun, 21 Aug 2016 23:36:39 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-item-based-cf/</guid>
+      <description>&lt;p&gt;El paper aborda el tema de la &lt;strong&gt;escalabilidad&lt;/strong&gt; y &lt;strong&gt;esparcicidad&lt;/strong&gt; de los &lt;em&gt;Filtros Colaborativos&lt;/em&gt;. En particular el cuello de botella ocurre al buscar los vecinos más cercanos de los usuarios, que se complica más cuando empiezan a aparecer más personas. Así también el problema de la precisión cuando tienen muchos ítems pero pocos &lt;em&gt;ratings&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;El &lt;em&gt;CF&lt;/em&gt; basado en ítems parte haciendo algo similar a los esquemas basados en modelos. Esto es, calcular las similaridades entre los ítems y luego escoger los ítems más similares.&lt;/p&gt;
+
+&lt;p&gt;Para medir la similaridad proponen tres métodos: &lt;em&gt;Cosine-based&lt;/em&gt;, &lt;em&gt;Correlation-based&lt;/em&gt; y &lt;em&gt;Adjusted-Cosine&lt;/em&gt;. De los cuales el último tiene mejor rendimiento (menor &lt;em&gt;MAE&lt;/em&gt;). La gracia de este último es que regula la parcialidad de los &lt;em&gt;ratings&lt;/em&gt; del usuario (ya sea &lt;em&gt;pesimista&lt;/em&gt;, &lt;em&gt;optimista&lt;/em&gt;, &lt;em&gt;bi-modal&lt;/em&gt;, etc), versus el &lt;em&gt;Correlation-based&lt;/em&gt; que regula los &lt;em&gt;ratings&lt;/em&gt; del ítem en particular.&lt;/p&gt;
+
+&lt;p&gt;El gran aporte del paper es mostrar que &lt;strong&gt;es posible obtener muy buen rendimiento eligiendo pocos ítems similares&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Sin embargo, esto parece no aplicar cuando se trata de ambientes de gran interacción y generación de contenido. Pues espera que el &lt;em&gt;set&lt;/em&gt; de ítems sea relativamente estático. Por ejemplo, esto no serviría para recomendar &lt;em&gt;Tweets&lt;/em&gt; o, en un caso algo ridículo, acciones en la bolsa.&lt;/p&gt;
+
+&lt;p&gt;Tampoco queda claro si esto funcionaría para ítems nuevos (&lt;em&gt;cold-start&lt;/em&gt;). &lt;strong&gt;Quizás se podrían aplicar medidas de similaridad en base a su contenido para soportar este tipo de casos&lt;/strong&gt;, ya que son ítems. Podemos incluir, por ejemplo, similaridad de género musical en el caso de canciones o de precio y marca en un &lt;em&gt;e-commerce&lt;/em&gt;. Una ventaja de esto versus una metodología &lt;em&gt;user-based&lt;/em&gt; es que no tenemos que hacerle preguntas al usuario para poder encontrar similitudes 😄.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Slope One</title>
+      <link>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-slope-one/</link>
+      <pubDate>Sun, 21 Aug 2016 23:21:45 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-slope-one/</guid>
+      <description>&lt;p&gt;El objetivo del paper es mostrar que los algoritmos de &lt;em&gt;Filtrado Colaborativo (CF)&lt;/em&gt; con &lt;em&gt;Slope One&lt;/em&gt; pueden tener un &lt;em&gt;performance&lt;/em&gt; similar a los clásicos algoritmos y además:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Ser fáciles de implementar y mantener.&lt;/li&gt;
+&lt;li&gt;Poder ser actualizados durante la ejecución.&lt;/li&gt;
+&lt;li&gt;Ser rápidos en consultar.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;La desventaja de los algoritmos que dependen de similaridades entre los usuarios es que hacen que el proceso sea lento y difícil de actualizar en tiempo real. En este sentido, Slope One tiene un esquema en &lt;em&gt;base a modelos&lt;/em&gt; y no en &lt;em&gt;memoria&lt;/em&gt;, lo que lo hace más eficiente en la práctica.&lt;/p&gt;
+
+&lt;p&gt;Si bien se afirma que Slope One es fácil de actualizar durante la ejecución, en particular la función de &lt;code&gt;$ dev_{i,j} $&lt;/code&gt;, deja poco claro para personas no tan familiarizadas con el tema cuál sería la forma correcta de hacerlo. No tiene una implementación en psedo-código ni da pistas.&lt;/p&gt;
+
+&lt;p&gt;Otro punto importante es que cuando realiza la simplificación se &lt;strong&gt;asume que el dataset es denso&lt;/strong&gt;. Esto en la práctica &lt;strong&gt;suele no ocurrir&lt;/strong&gt;. Hubiera sido interesante tener &lt;em&gt;benchmarks&lt;/em&gt; sobre un mismo &lt;em&gt;dataset&lt;/em&gt; y comparar el método original versus el simplificado.&lt;/p&gt;
+
+&lt;p&gt;Una cosa que no me quedó claro (esto puede ser una mala interpretación mía), en la fórmula del Slope One con pesos, cuando se realiza la sumatoria, &lt;strong&gt;se excluye del arreglo de los ítems rateados del usuario el ítem que voy a predecir&lt;/strong&gt;. Esto es como innecesario y redundante.&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/lemiremaclachlan-1.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;Finalmente, me parece muy interesante que la idea de separar los ítems que al usuario les gustó de los que no les gustó con BI-POLAR Slope One haya arrojado mayores resultados. Dando un toque desde una perspectiva de la psicología puede generar mejoras.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Comentarios sobre Filtrado Colaborativo de Herlocker J.</title>
+      <link>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-filtrado-colaborativo-de-herlocker-j./</link>
+      <pubDate>Sun, 21 Aug 2016 23:08:03 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-filtrado-colaborativo-de-herlocker-j./</guid>
+      <description>
+
+&lt;p&gt;El &lt;em&gt;paper&lt;/em&gt; parte con el problema de &lt;em&gt;recomendación colaborativa&lt;/em&gt; y lo divide en etapas. Luego en cada etapa toma ciertos posibles modos de abordarla y los pone en comparación. Finalmente concluye con &lt;strong&gt;un flujo de trabajo sugerido&lt;/strong&gt;, no obstante avisa de ciertos cuidados a considerar dependiendo del contexto y el tipo de datos que tenemos.&lt;/p&gt;
+
+&lt;p&gt;La ventaja de un filtrado colaborativo es que no depende de la información intrínseca de un ítem, sino que se basa en el contexto de los usuarios que lo recomiendan y como me parezco a ellos. De esta forma es posible obtener recomendaciones de ítems que a ese tipo de usuarios les parece importantes.&lt;/p&gt;
+
+&lt;p&gt;Esto es bueno porque pueden ocurrir recomendaciones &lt;em&gt;&amp;lsquo;serendipitous&amp;rsquo;&lt;/em&gt; (&lt;em&gt;fortuitas&lt;/em&gt;), que son items con contenido que yo no esperaba pero me resultaron muy preciadas.&lt;/p&gt;
+
+&lt;h3 id=&#34;sobre-las-semejanzas-de-los-usuarios:8de50cd2ab861f6f157dd7f4afd5179e&#34;&gt;Sobre las semejanzas de los usuarios&lt;/h3&gt;
+
+&lt;p&gt;Creo que la razón por la cual la &lt;em&gt;correlación de Spearman&lt;/em&gt; funciona mejor (por lo general) que la de &lt;em&gt;Pearson&lt;/em&gt;, es que cuando a nosotros los humanos nos gusta mucho algo, &lt;strong&gt;la relación de eso con algo que solo nos &lt;em&gt;&amp;ldquo;gusta más o menos&amp;rdquo;&lt;/em&gt; no es lineal, sino logarítmica&lt;/strong&gt;. Esto, en mi opinión, hace que la medida de &lt;em&gt;Spearman&lt;/em&gt; funcione mejor.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Ver: &lt;a href=&#34;http://www.scientificamerican.com/article/a-natural-log&#34;&gt;http://www.scientificamerican.com/article/a-natural-log&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Me pareció muy interesante lo que salió a la luz cuando analizaban los vecinos más cercanos. Uno suele pensar en estas áreas de datos que mientras más información tengamos, siempre es mejor. Sin embargo, se aprecia que conviene trabajar dentro de cierto rango de vecinos. Pues muchos hacen menos precisa la recomendación y con muy pocos tenemos problemas &lt;em&gt;coverage&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;En una parte habla de que &lt;em&gt;el proceso de recomendación debe hacerse en menos de 1 segundo para miles de usuarios&lt;/em&gt;, sin embargo esto contradice un poco la metodología que están usando porque ellos mismo declaran que puede conllevar a problemas de escalabilidad.&lt;/p&gt;
+
+&lt;p&gt;Finalmente, puesto que realizaron todo sobre el dataset de  MovieLens, sus algoritmos fueron probados para ítems del tipo &lt;em&gt;película/música&lt;/em&gt;, entonces &lt;strong&gt;no podemos asegurar que este flujo de trabajo sugerido funcione en otros ámbitos&lt;/strong&gt;. Por ejemplo, recomendar una persona en alguna aplicación de citas.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

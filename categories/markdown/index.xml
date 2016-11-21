@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Markdown on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/markdown/</link>
+    <description>Recent content in Markdown on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Dec 2015 23:55:08 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/markdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>LaTeX and Markdown spell check in Atom</title>
+      <link>https://blog.lopezjuri.com/2015/12/29/latex-and-markdown-spell-check-in-atom/</link>
+      <pubDate>Tue, 29 Dec 2015 23:55:08 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/29/latex-and-markdown-spell-check-in-atom/</guid>
+      <description>
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/atom-spellcheck.gif&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;I use Atom for everything. In the last days, I have wrote a lot of text in Markdown and LaTeX, but english is not my main language so I spend some time searching lint tools and plugins to help me out.&lt;/p&gt;
+
+&lt;p&gt;Atoms comes with a spell-check plugin, but it does not lint every file type.&lt;/p&gt;
+
+&lt;p&gt;To enable Markdown and LaTeX:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;text.tex.latex, source.gfm
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/atom-spellcheck-settings.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;CMD+SHIFT+.&lt;/code&gt; to show the suggestions&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

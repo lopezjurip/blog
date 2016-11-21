@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Windows on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/windows/</link>
+    <description>Recent content in Windows on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 28 Dec 2015 12:08:21 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/windows/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Setup Python 3 &amp; Git on Windows 10</title>
+      <link>https://blog.lopezjuri.com/2015/12/28/setup-python-3--git-on-windows-10/</link>
+      <pubDate>Mon, 28 Dec 2015 12:08:21 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/28/setup-python-3--git-on-windows-10/</guid>
+      <description>
+
+&lt;p&gt;Personally, I don&amp;rsquo;t like installing software using binary installers from the official site, because in the long run you have to deal with incompatibilities and a sparse development ecosystem.&lt;/p&gt;
+
+&lt;p&gt;On systems as OSX or Linux you have well known package-managers like &lt;a href=&#34;brew.sh&#34;&gt;&lt;code&gt;brew&lt;/code&gt;&lt;/a&gt; and &lt;code&gt;apt-get&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the case of Windows there is &lt;a href=&#34;https://chocolatey.org/&#34;&gt;&lt;strong&gt;Chocolatey&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;chocolatey:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Chocolatey&lt;/h2&gt;
+
+&lt;h3 id=&#34;installing:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Installing&lt;/h3&gt;
+
+&lt;p&gt;We open the &lt;code&gt;PowerShell&lt;/code&gt; in &lt;strong&gt;Administrator Mode&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You can find it at: &lt;code&gt;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To install, we have to lower the security levels with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Set-ExecutionPolicy Unrestricted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s install it with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;iex ((new-object net.webclient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;usage:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Usage&lt;/h3&gt;
+
+&lt;p&gt;You can install any program listed on &lt;a href=&#34;https://chocolatey.org/packages&#34;&gt;chocolatey.org/packages&lt;/a&gt; with &lt;code&gt;choco install&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install firefox
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can add a &lt;code&gt;-y&lt;/code&gt; argument to install immediately:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install atom -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;git:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Git&lt;/h2&gt;
+
+&lt;p&gt;To install git it&amp;rsquo;s simply as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install git.install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start using it, we have to restart the PowerShell or refresh or &lt;code&gt;$PATH&lt;/code&gt; environment variable with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$env:Path = [System.Environment]::GetEnvironmentVariable(&amp;quot;Path&amp;quot;, &amp;quot;User&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now &lt;code&gt;git&lt;/code&gt; command should work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;optional-git-setup:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Optional Git Setup&lt;/h3&gt;
+
+&lt;p&gt;I recommend:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;echo &amp;quot;Identify yourself&amp;quot;
+git config --global user.name &amp;quot;NAME LASTNAME&amp;quot;
+git config --global user.email email@foo.com
+
+echo &amp;quot;Don&#39;t ask again our user and password&amp;quot;
+git config --global credential.helper wincred
+
+echo &amp;quot;Colors!&amp;quot;
+git config --global color.ui auto
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;python-3:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Python 3&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install python -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;pip:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;pip&lt;/h3&gt;
+
+&lt;p&gt;Pip comes with this installation, you can see it at &lt;code&gt;C:\tools\python\Scripts&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Try, &lt;code&gt;pip&lt;/code&gt; on your console, if it does not work, restart the PowerShell. If the problem continues, it&amp;rsquo;s probably because it is not added to the &lt;code&gt;$PATH&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To do so:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;[Environment]::SetEnvironmentVariable(&amp;quot;Path&amp;quot;, &amp;quot;$env:Path;C:\tools\python\Scripts\&amp;quot;, &amp;quot;User&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

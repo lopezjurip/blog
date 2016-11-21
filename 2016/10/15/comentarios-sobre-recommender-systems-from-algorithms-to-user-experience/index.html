@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Comentarios sobre Recommender systems: from algorithms to user experience &middot; Patricio López J.</title>
+
+  
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-x.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/highlight/railscasts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.lopezjuri.com/touch-icon-144-precomposed.png">
+  <link href="https://blog.lopezjuri.com/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="author" href="http://plus.google.com/105711235388160251353">
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+        <img src="https://www.gravatar.com/avatar/dc6b7d7fbef65eda1ce854dbe02f8db3?s=200"
+             alt="gravatar" title="Patricio López J.">
+      
+      <h1>Patricio López J.</h1>
+      <p class="lead">Full-stack developer from Chile</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/">Blog</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/mrpatiwi"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://bitbucket.org/mrpatiwi"><i class="fa fa-bitbucket-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/lopezjuri"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/MrPatiwi"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="https://blog.lopezjuri.com/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2016 <a href="https://blog.lopezjuri.com/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1>Comentarios sobre Recommender systems: from algorithms to user experience</h1>
+    <span class="post-date">Oct 15, 2016 &middot; 2 minute read &middot; <a href="https://blog.lopezjuri.com/2016/10/15/comentarios-sobre-recommender-systems-from-algorithms-to-user-experience/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://blog.lopezjuri.com/categories/recsys">recsys</a>
+    </span>
+    
+
+<p>Este paper toca los temas relacionados con la experiencia del usuario y su percepción sobre el sistema recomendador. En este sentido, es un enfoque más aterrizado en su uso final y en su repercución en negocio del que implementa el sistema.</p>
+
+<h2 id="evaluaciones:82bfd1fdab6858c74435b541e7095914">Evaluaciones</h2>
+
+<p>De partida es difícil evaluar cómo los usuarios presienten una pieza de software. En primer lugar, en ellos existen varios sezgos personales y cuesta ser objetivos. En segundo lugar, es costo realizar mediciones y estudios, pues no es algo que se pueda programar y ejecutar cuantas veces se quiera, sino que requiere traer personas de verdad.</p>
+
+<p>Algo que se usa hoy en día en entornos de producción es <em>A/B Testing</em>. Esto es, a grupos de usuarios se les presenta distintas versiones de un software (sin que ellos sepan) y se realizan mediciones y análisis.</p>
+
+<blockquote>
+<p><a href="https://es.wikipedia.org/wiki/Test_A/B">https://es.wikipedia.org/wiki/Test_A/B</a></p>
+</blockquote>
+
+<h2 id="tags-descontroladas:82bfd1fdab6858c74435b541e7095914">Tags descontroladas</h2>
+
+<p>Algo anecdótico del paper, es que toca el problema que ocurre cuando se le deja al usuario crear tags. Ejemplo:</p>
+
+<ul>
+<li><em>&ldquo;Tarantino&rdquo;</em></li>
+<li><em>&ldquo;Quentin Tarantino&rdquo;</em></li>
+<li><em>&ldquo;tarantino is god&rdquo;</em></li>
+</ul>
+
+<p>Todas se refieren a lo mismo, pero es difícil identificar y corregir estos casos sin tener que leer manualmente el dataset. En el proyecto de <em>Minería de Datos</em> de hace un año, con mi compañero tuvimos este mismo problema pero con las tags de canciones en <a href="http://www.last.fm/">last.fm</a>.</p>
+
+<h2 id="recommendaciones-grupales:82bfd1fdab6858c74435b541e7095914">Recommendaciones grupales</h2>
+
+<p>Destacaré la frase citada de <em>Masthoff y Gatt (2006)</em>:</p>
+
+<blockquote>
+<p>&rdquo; Is it better to make sure that one person is as happy as possible? Or to make sure that no person is too unhappy?&ldquo;.</p>
+</blockquote>
+
+<p>Esto pues sirve puede servir para mi proyecto final del ramo.</p>
+
+<h2 id="rdf:82bfd1fdab6858c74435b541e7095914">RDF</h2>
+
+<p>Finalmente, se habla de explotar el contenido proporcionado por el usuario, por ejemplo los datos disponibles en <a href="https://www.tripadvisor.com/">tripadvisor.com</a> y de combinarlos con más sitios.</p>
+
+<p>En este sentido los trabajos que se están haciendo en la <em>web semántica</em> con el fin de estandarizar las relaciones entre recursos (<a href="https://www.w3.org/RDF/">https://www.w3.org/RDF/</a>) podría significar un gran avance en el área de los sistemas recomendadores. Pues podrían relacionarse <em>datasets</em> distintos y con esto utilizar contexto, relaciones entre items, relaciones entre usuarios, opiniones sociales, temporalidad y más para generar recomendaciones.</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "blog-lopezjuri";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "blog-lopezjuri";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://blog.lopezjuri.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  var _gaq=[['_setAccount','UA-57934557-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+

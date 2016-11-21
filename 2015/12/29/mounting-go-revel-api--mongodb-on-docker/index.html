@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Mounting Go Revel API &#43; MongoDB on Docker &middot; Patricio López J.</title>
+
+  
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-x.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/highlight/railscasts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.lopezjuri.com/touch-icon-144-precomposed.png">
+  <link href="https://blog.lopezjuri.com/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="docker,go,revel,api,mongo,godep">
+  <link rel="author" href="http://plus.google.com/105711235388160251353">
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+        <img src="https://www.gravatar.com/avatar/dc6b7d7fbef65eda1ce854dbe02f8db3?s=200"
+             alt="gravatar" title="Patricio López J.">
+      
+      <h1>Patricio López J.</h1>
+      <p class="lead">Full-stack developer from Chile</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/">Blog</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/mrpatiwi"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://bitbucket.org/mrpatiwi"><i class="fa fa-bitbucket-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/lopezjuri"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/MrPatiwi"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="https://blog.lopezjuri.com/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2016 <a href="https://blog.lopezjuri.com/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1>Mounting Go Revel API &#43; MongoDB on Docker</h1>
+    <span class="post-date">Dec 29, 2015 &middot; 8 minute read &middot; <a href="https://blog.lopezjuri.com/2015/12/29/mounting-go-revel-api--mongodb-on-docker/#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://blog.lopezjuri.com/categories/docker">docker</a><a class="label" href="https://blog.lopezjuri.com/categories/go">go</a><a class="label" href="https://blog.lopezjuri.com/categories/api">api</a><a class="label" href="https://blog.lopezjuri.com/categories/mongo">mongo</a>
+    </span>
+    
+
+<p>Go is fast, modern and fun to use. There are good web frameworks like <a href="https://github.com/go-martini/martini">martini</a> or <a href="https://github.com/gin-gonic/gin">gin</a>. The last time I tried <code>gin</code> I had lot of troubles declaring the routes, so I moved to Revel.</p>
+
+<p>It is known that Go doesn&rsquo;t have a very good dependency management, so we will use <a href="https://github.com/tools/godep">github.com/tools/godep</a>.</p>
+
+<p>I am a fan of Docker 🐳, because I like to keep things simple and easy to use (and deploy). So I will write about how to mount a Revel app using Docker.</p>
+
+<blockquote>
+<p>See the complete project on: <a href="https://github.com/mrpatiwi/revel-mongo-api"><strong>github.com/mrpatiwi/revel-mongo-api</strong></a></p>
+</blockquote>
+
+<h2 id="preparation:bbf8466e6007f86e0622c2d9c8fa2970">Preparation</h2>
+
+<ul>
+<li>Make sure you have Go installed and your <code>$GOPATH</code> is set.</li>
+<li>You will need <a href="https://docs.docker.com/machine/">Docker-Machine</a> if you are on OSX.</li>
+<li>Have <a href="https://www.docker.com/">Docker</a> and <a href="https://docs.docker.com/compose/">Docker-Compose</a> installed.</li>
+<li><a href="https://www.mongodb.org/">MongoDB</a> installed.</li>
+</ul>
+
+<h2 id="revel:bbf8466e6007f86e0622c2d9c8fa2970">Revel</h2>
+
+<p>You can follow the official steps on <a href="https://revel.github.io">revel.github.io</a>, but in short words it goes like this:</p>
+
+<p>Let&rsquo;s install the basic dependencies:</p>
+
+<pre><code class="language-sh">go get github.com/revel/revel
+go get github.com/revel/cmd/revel
+</code></pre>
+
+<blockquote>
+<p><strong>From here and forward:</strong></p>
+
+<ul>
+<li><strong>Replace <code>mrpatiwi</code> with your Github username</strong></li>
+<li><strong>Replace <code>revel-mongo-api</code> with you app name</strong></li>
+</ul>
+</blockquote>
+
+<p>Generate our app:</p>
+
+<pre><code class="language-sh">revel new github.com/mrpatiwi/revel-mongo-api
+</code></pre>
+
+<pre><code class="language-sh">cd $GOPATH/src/github.com/mrpatiwi/revel-mongo-api
+</code></pre>
+
+<p>To start our app and see if it&rsquo;s working:</p>
+
+<pre><code class="language-sh">revel run github.com/mrpatiwi/revel-mongo-api
+</code></pre>
+
+
+<figure >
+    
+        <img src="/images/reveldocker-helloworld.png" />
+    
+    
+</figure>
+
+
+<h2 id="installing-godep:bbf8466e6007f86e0622c2d9c8fa2970">Installing Godep</h2>
+
+<p>You can find project&rsquo;s repository at: <a href="https://github.com/tools/godep">github.com/tools/godep</a>.</p>
+
+<p>To install:</p>
+
+<pre><code class="language-sh">go get github.com/tools/godep
+</code></pre>
+
+<p>This basically manage your project dependencies saving in a file <code>Godeps/Godeps.json</code> all the necessary information.</p>
+
+<p>Every time we require a new Go dependency we have to save it with:</p>
+
+<pre><code class="language-sh">godep save ./app
+</code></pre>
+
+<p>Make sure to ignore the directory: <code>Godeps/_workspace</code>:</p>
+
+<pre><code class="language-sh"># Append this to your .gitignore
+Godeps/_workspace
+</code></pre>
+
+<p>When someone clones a clean version of your project, they will not have the dependencies installed. To do so:</p>
+
+<pre><code class="language-sh">godep go install ./app
+</code></pre>
+
+<p>Make sure to document that 👍</p>
+
+<h2 id="docker:bbf8466e6007f86e0622c2d9c8fa2970">Docker</h2>
+
+<p>We must put a <code>Dockerfile</code> on the root of our project:</p>
+
+<pre><code class="language-dockerfile">FROM golang:1.5.2
+
+# Move current project to a valid go path
+COPY . /go/src/github.com/mrpatiwi/revel-mongo-api
+WORKDIR /go/src/github.com/mrpatiwi/revel-mongo-api
+
+# Install Revel CLI
+RUN go get github.com/revel/cmd/revel
+
+# Install project dependencies
+RUN go get github.com/tools/godep
+RUN godep go install ./app
+
+# Run app in production mode
+EXPOSE 9000
+ENTRYPOINT revel run github.com/mrpatiwi/revel-mongo-api prod 9000
+
+</code></pre>
+
+<p>To make deploying easier, we will use Docker-Compose. This will be even more useful when we integrate our app with MongoDB. We create a file named <code>docker-compose.yml</code> with:</p>
+
+<pre><code class="language-yml"># docker-compose.yml
+
+web:
+  build: .
+  restart: always
+  ports:
+    - '80:9000'
+</code></pre>
+
+<p>To build and run our project:</p>
+
+<pre><code class="language-sh"># Run in 'detached' (background) mode
+docker-compose up -d
+# Building web
+# Step 1 : FROM golang:1.5.2
+# ...
+# Step 8 : ENTRYPOINT revel run github.com/mrpatiwi/revel-mongo-api prod 9000
+#  ---&gt; Running in 04dc37d33f14
+#  ---&gt; ef842993944f
+# Removing intermediate container 04dc37d33f14
+# Successfully built ef842993944f
+# Creating revelmongoapi_web_1
+</code></pre>
+
+
+<figure >
+    
+        <img src="/images/reveldocker-helloworld2.png" />
+    
+    
+</figure>
+
+
+<blockquote>
+<p><code>192.168.99.100</code> is the IP of my local machine ran by Docker-Machine.</p>
+</blockquote>
+
+<p>See the logs:</p>
+
+<pre><code class="language-sh">docker-compose logs
+# Attaching to revelmongoapi_web_1
+# web_1 | ~
+# web_1 | ~ revel! http://revel.github.io
+# web_1 | ~
+# web_1 | Listening on :9000...
+</code></pre>
+
+<p>Stop and remove:</p>
+
+<pre><code class="language-sh">docker-compose stop &amp;&amp; docker-compose rm -f
+# Stopping revelmongoapi_web_1 ... done
+# Going to remove revelmongoapi_web_1
+# Removing revelmongoapi_web_1 ... done
+</code></pre>
+
+<h2 id="mongodb:bbf8466e6007f86e0622c2d9c8fa2970">MongoDB</h2>
+
+<p>When developing, install this database in your computer. If you are on OSX it&rsquo;s easy with <code>brew</code>:</p>
+
+<pre><code class="language-sh">brew install mongodb
+</code></pre>
+
+<p>On <em>production</em> environment we will use MongoDB Docker Image.</p>
+
+<p>Back to our project, let&rsquo;s use <a href="https://labix.org/mgo">go-mgo/mgo</a> as our database driver.</p>
+
+<pre><code class="language-sh">go get gopkg.in/mgo.v2
+</code></pre>
+
+<h3 id="model:bbf8466e6007f86e0622c2d9c8fa2970">Model</h3>
+
+<p>Just to exemplify, we will create a <code>Book</code> model:</p>
+
+<pre><code class="language-go">// app/models/book.go
+
+package models
+
+import &quot;gopkg.in/mgo.v2/bson&quot;
+
+/*
+Book model
+*/
+type Book struct {
+	ID    bson.ObjectId `json:&quot;_id,omitempty&quot; bson:&quot;_id,omitempty&quot;`
+	Title string        `json:&quot;title&quot; bson:&quot;title&quot;`
+	Pages int           `json:&quot;pages&quot; bson:&quot;pages&quot;`
+}
+</code></pre>
+
+<p>Note the marshaling attributes:</p>
+
+<ul>
+<li><code>json</code>: How we want the key when encoding and decoding from and to JSON. The attribute <code>omitempty</code> hide the field when it is empty.</li>
+<li><code>bson</code>: How we want the MongoDB key. The attribute <code>omitempty</code> same as above.</li>
+</ul>
+
+<h3 id="database-connection:bbf8466e6007f86e0622c2d9c8fa2970">Database connection</h3>
+
+<p>We have to setup our database, so we will crate a package named <code>database</code> in charge of this:</p>
+
+<pre><code class="language-go">// app/database/setup.go
+
+package database
+
+import &quot;gopkg.in/mgo.v2&quot;
+
+/*
+Database session
+*/
+var Session *mgo.Session
+
+/*
+Book's model connection
+*/
+var Books *mgo.Collection
+
+/*
+Init database
+*/
+func Init(uri, dbname string) error {
+	session, err := mgo.Dial(uri)
+	if err != nil {
+		return err
+	}
+
+	// See https://godoc.org/labix.org/v2/mgo#Session.SetMode
+	session.SetMode(mgo.Monotonic, true)
+
+	// Expose session and models
+	Session = session
+	Books = session.DB(dbname).C(&quot;books&quot;)
+
+	return nil
+}
+</code></pre>
+
+<p>Remember to use <em>Upper Camel Case</em> to make a variable, function or struct <strong>public outside the package</strong>.</p>
+
+<h4 id="settings:bbf8466e6007f86e0622c2d9c8fa2970">Settings</h4>
+
+<p>Our database have at least two environment: <em>production</em> and <em>development</em>, so we need different setups for each one of this.</p>
+
+<p>First, we will modify <code>conf/app.conf</code> and set how we <em>dial</em> the database in <em>development</em>:</p>
+
+<pre><code class="language-conf"># conf/app.conf
+
+# ...
+
+################################################################################
+# Section: dev
+# This section is evaluated when running Revel in dev mode. Like so:
+#   `revel run path/to/myapp`
+[dev]
+# This sets `DevMode` variable to `true` which can be used in your code as
+#   `if revel.DevMode {...}`
+#   or in your templates with
+#   `&lt;no value&gt;`
+mode.dev = true
+
+# ...
+
+# Database
+database.uri  = &quot;mongodb://localhost:27017&quot;  # &lt;- HERE!
+database.name = &quot;revelapp&quot;                   # &lt;- HERE!
+</code></pre>
+
+<p>Now we need to init our database inside <code>app/init.go</code> using <code>revel.OnAppStart(...)</code>:</p>
+
+<pre><code class="language-go">// app/init.go
+package app
+
+import (
+	&quot;github.com/mrpatiwi/revel-mongo-api/app/database&quot;
+	&quot;github.com/revel/revel&quot;
+)
+
+func init() {
+	revel.Filters = []revel.Filter{
+		revel.PanicFilter,
+		// ...
+		revel.ActionInvoker,
+	}
+
+	// Startup
+	revel.OnAppStart(InitDB)
+}
+
+/*
+InitDB to connection to database
+*/
+func InitDB() {
+	// The second argument are default values, for safety
+	uri := revel.Config.StringDefault(&quot;database.uri&quot;, &quot;mongodb://localhost:27017&quot;)
+	name := revel.Config.StringDefault(&quot;database.name&quot;, &quot;revelapp&quot;)
+	if err := database.Init(uri, name); err != nil {
+		revel.INFO.Println(&quot;DB Error&quot;, err)
+	}
+}
+
+var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
+	c.Response.Out.Header().Add(&quot;X-Frame-Options&quot;, &quot;SAMEORIGIN&quot;)
+	c.Response.Out.Header().Add(&quot;X-XSS-Protection&quot;, &quot;1; mode=block&quot;)
+	c.Response.Out.Header().Add(&quot;X-Content-Type-Options&quot;, &quot;nosniff&quot;)
+
+	fc[0](c, fc[1:]) // Execute the next filter stage.
+}
+</code></pre>
+
+<h3 id="routes:bbf8466e6007f86e0622c2d9c8fa2970">Routes</h3>
+
+<p>Setup the endpoints in <code>conf/routes</code>, then we will code the controller:</p>
+
+<pre><code class="language-txt"># conf/routes
+
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+module:testrunner
+
+GET     /                                       App.Index
+GET     /books/                                 Books.Index
+POST    /books/create                           Books.Create
+GET     /books/:id                              Books.Show
+
+# ...
+</code></pre>
+
+<h3 id="controller:bbf8466e6007f86e0622c2d9c8fa2970">Controller</h3>
+
+<p>Create a file at: <code>app/controllers/books.go</code>:</p>
+
+<pre><code class="language-go">// app/controllers/books.go
+
+package controllers
+
+import (
+	&quot;encoding/json&quot;
+	&quot;io/ioutil&quot;
+	&quot;log&quot;
+	&quot;net/http&quot;
+
+	&quot;github.com/mrpatiwi/revel-mongo-api/app/database&quot;
+	&quot;github.com/mrpatiwi/revel-mongo-api/app/models&quot;
+	&quot;github.com/revel/revel&quot;
+	&quot;gopkg.in/mgo.v2/bson&quot;
+)
+</code></pre>
+
+<p>Declare this is a controller named <code>Books</code>:</p>
+
+<pre><code class="language-go">/*
+Books controller
+*/
+type Books struct {
+	*revel.Controller
+}
+</code></pre>
+
+<h4 id="post-books-create:bbf8466e6007f86e0622c2d9c8fa2970">POST /books/create</h4>
+
+<p>To have some data to show, first we will create the handler controller for <code>POST /books/create</code>:</p>
+
+<pre><code class="language-go">/*
+Create book
+*/
+func (c Books) Create() revel.Result {
+	book := &amp;models.Book{}
+	if body, err := ioutil.ReadAll(c.Request.Body); err != nil {
+		return c.RenderText(&quot;bad request&quot;)
+
+	} else if err := json.Unmarshal(body, book); err != nil {
+		return c.RenderText(&quot;could not parse request&quot;)
+
+	} else if err := database.Books.Insert(book); err != nil {
+		// Internal Server Error
+		log.Fatal(err)
+		c.Response.Status = http.StatusInternalServerError
+		return c.RenderText(&quot;could not be saved&quot;)
+	}
+	c.Response.Status = http.StatusCreated
+	return c.RenderJson(book)
+}
+</code></pre>
+
+<p>We can test it using <code>curl</code> from the command line:</p>
+
+<pre><code class="language-sh">curl -H &quot;Content-Type: application/json&quot; \
+  -X POST -d '{ &quot;title&quot;: &quot;Animal Farm&quot;, &quot;pages&quot;: 100 }' -i \
+  http://localhost:9000/books/create
+</code></pre>
+
+<p>Response:</p>
+
+<pre><code class="language-txt">HTTP/1.1 201 Created
+Content-Length: 44
+Content-Type: application/json; charset=utf-8
+Date: Wed, 30 Dec 2015 00:52:24 GMT
+Set-Cookie: REVEL_FLASH=; Path=/
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+
+{
+  &quot;title&quot;: &quot;Animal Farm&quot;,
+  &quot;pages&quot;: 100
+}
+</code></pre>
+
+<h4 id="get-books:bbf8466e6007f86e0622c2d9c8fa2970">GET /books</h4>
+
+<p>Let&rsquo;s create a Index where we will return every book in the database:</p>
+
+<pre><code class="language-go">/*
+Index of all books
+*/
+func (c Books) Index() revel.Result {
+	results := []models.Book{}
+	if err := database.Books.Find(bson.M{}).All(&amp;results); err != nil {
+		// Internal Server Error
+		log.Fatal(err)
+	}
+	return c.RenderJson(results)
+}
+</code></pre>
+
+<p>Let&rsquo;s see our created book:</p>
+
+<pre><code class="language-sh">curl -i http://localhost:9000/books
+</code></pre>
+
+<p>Response:</p>
+
+<pre><code class="language-txt">HTTP/1.1 200 OK
+Content-Length: 277
+Content-Type: application/json; charset=utf-8
+Date: Wed, 30 Dec 2015 00:55:38 GMT
+Set-Cookie: REVEL_FLASH=; Path=/
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+
+[
+  {
+    &quot;_id&quot;: &quot;56832ac8c52f68da8cae6818&quot;,
+    &quot;title&quot;: &quot;Animal Farm&quot;,
+    &quot;pages&quot;: 100
+  }
+]
+</code></pre>
+
+<h4 id="get-books-id:bbf8466e6007f86e0622c2d9c8fa2970">GET /books/:id</h4>
+
+<p>To show a individual Book:</p>
+
+<pre><code class="language-go">/*
+Show particular book
+*/
+func (c Books) Show(id string) revel.Result {
+	result := models.Book{}
+	if !bson.IsObjectIdHex(id) {
+		c.Response.Status = http.StatusBadRequest
+		return c.RenderText(&quot;id is not valid&quot;)
+
+	} else if obj := bson.ObjectIdHex(id); !obj.Valid() {
+		c.Response.Status = http.StatusBadRequest
+		return c.RenderText(&quot;id is not valid&quot;)
+
+	} else if err := database.Books.Find(bson.M{&quot;_id&quot;: obj}).One(&amp;result); err != nil {
+		// Internal Server Error
+		log.Fatal(err)
+	}
+	return c.RenderJson(result)
+}
+</code></pre>
+
+<p>We can get the <code>id</code> from the previous request. So:</p>
+
+<pre><code class="language-sh">curl -i http://localhost:9000/books/56832ac8c52f68da8cae6818
+</code></pre>
+
+<p>Response:</p>
+
+<pre><code class="language-txt">HTTP/1.1 200 OK
+Content-Length: 81
+Content-Type: application/json; charset=utf-8
+Date: Wed, 30 Dec 2015 00:57:22 GMT
+Set-Cookie: REVEL_FLASH=; Path=/
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+
+{
+  &quot;_id&quot;: &quot;56832ac8c52f68da8cae6818&quot;,
+  &quot;title&quot;: &quot;Animal Farm&quot;,
+  &quot;pages&quot;: 100
+}
+</code></pre>
+
+<h3 id="mongodb-image:bbf8466e6007f86e0622c2d9c8fa2970">MongoDB Image</h3>
+
+<p>On production, we need a container running MongoDB. We have to modify our <code>docker-compose.yml</code>:</p>
+
+<pre><code class="language-yml">web:
+  build: .
+  restart: always
+  links:
+    - mongo
+  ports:
+    - '80:9000'
+
+mongo:
+  image: mongo
+</code></pre>
+
+<p>Back to our <code>conf/app.conf</code> file, we have to add <code>mongo</code> as our host running the database:</p>
+
+<pre><code class="language-conf"># conf/app.conf
+
+# ...
+
+################################################################################
+# Section: dev
+
+# ...
+
+################################################################################
+# Section: prod
+# This section is evaluated when running Revel in production mode. Like so:
+#   `revel run path/to/myapp prod`
+# See:
+#  [dev] section for documentation of the various settings
+[prod]
+mode.dev = false
+
+# ...
+
+# Database
+databaseuri  = &quot;mongodb://mongo:27017&quot;
+databasename = &quot;revelapp&quot;
+</code></pre>
+
+<h3 id="last-details:bbf8466e6007f86e0622c2d9c8fa2970">Last details</h3>
+
+<p>We add the new dependencies to <code>Godep/Godep.json</code> with:</p>
+
+<pre><code class="language-sh">godep save ./app
+</code></pre>
+
+<h2 id="run-it:bbf8466e6007f86e0622c2d9c8fa2970">Run it</h2>
+
+<p>This is the most simple setup, but it is a good starting point.</p>
+
+<p>To launch our app:</p>
+
+<pre><code class="language-sh">docker-compose up -d
+</code></pre>
+
+<h1 id="conclusions:bbf8466e6007f86e0622c2d9c8fa2970">Conclusions</h1>
+
+<p>Revel is a well-thinked framework, although still in beta.</p>
+
+<p>Left pending in this post:</p>
+
+<ul>
+<li>Remove unused middleware, if we want to develop an API, we do not need cookies or HTML rendering.</li>
+</ul>
+
+<h2 id="pros:bbf8466e6007f86e0622c2d9c8fa2970">Pros:</h2>
+
+<ul>
+<li>A true framework. It calls you, not not the other way around.</li>
+<li>Excellent routing system.</li>
+<li>It is focused on full-stack web apps. I have to try Meteor.js and compare it to Revel before replacing Ruby on Rails 😄</li>
+<li>Config file with environments 👌</li>
+</ul>
+
+<h2 id="cons:bbf8466e6007f86e0622c2d9c8fa2970">Cons:</h2>
+
+<ul>
+<li>Manual database integration, but they <a href="https://revel.github.io/#Wishlist">have something in plans</a>.</li>
+<li>You must start the app with Revel CLI, this can cause some integration problems.</li>
+<li>Does it scale? 📈</li>
+</ul>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "blog-lopezjuri";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "blog-lopezjuri";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://blog.lopezjuri.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  var _gaq=[['_setAccount','UA-57934557-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+

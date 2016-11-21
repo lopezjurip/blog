@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Setup on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/setup/</link>
+    <description>Recent content in Setup on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Dec 2015 23:55:08 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/setup/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>LaTeX and Markdown spell check in Atom</title>
+      <link>https://blog.lopezjuri.com/2015/12/29/latex-and-markdown-spell-check-in-atom/</link>
+      <pubDate>Tue, 29 Dec 2015 23:55:08 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/29/latex-and-markdown-spell-check-in-atom/</guid>
+      <description>
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/atom-spellcheck.gif&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;p&gt;I use Atom for everything. In the last days, I have wrote a lot of text in Markdown and LaTeX, but english is not my main language so I spend some time searching lint tools and plugins to help me out.&lt;/p&gt;
+
+&lt;p&gt;Atoms comes with a spell-check plugin, but it does not lint every file type.&lt;/p&gt;
+
+&lt;p&gt;To enable Markdown and LaTeX:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;text.tex.latex, source.gfm
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/atom-spellcheck-settings.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;CMD+SHIFT+.&lt;/code&gt; to show the suggestions&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>C Development Environment with Atom on OSX</title>
+      <link>https://blog.lopezjuri.com/2015/12/29/c-development-environment-with-atom-on-osx/</link>
+      <pubDate>Tue, 29 Dec 2015 22:44:57 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/29/c-development-environment-with-atom-on-osx/</guid>
+      <description>
+
+&lt;p&gt;There is two kind of people: You love &lt;code&gt;vim&lt;/code&gt; or you hate &lt;code&gt;vim&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Therefore I use &lt;a href=&#34;https://atom.io/&#34;&gt;Atom&lt;/a&gt; 💗.&lt;/p&gt;
+
+&lt;h2 id=&#34;install-atom:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;Install Atom&lt;/h2&gt;
+
+&lt;p&gt;Use &lt;a href=&#34;http://brew.sh/&#34;&gt;Homebrew&lt;/a&gt;!&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;ruby -e &amp;quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, install &lt;a href=&#34;http://caskroom.io/&#34;&gt;Homebrew Cask&lt;/a&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew tap caskroom/cask
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Finally, install Atom:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew cask install atom
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;plugins:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;Plugins&lt;/h2&gt;
+
+&lt;h3 id=&#34;autocomplete-clang-https-atom-io-packages-autocomplete-clang:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;&lt;a href=&#34;https://atom.io/packages/autocomplete-clang&#34;&gt;autocomplete-clang&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;We will install &lt;code&gt;autocomplete-clang&lt;/code&gt;, but first we need to install &lt;code&gt;clang&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew install llvm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;See if &lt;code&gt;clang&lt;/code&gt; was installed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;clang -v
+# Apple LLVM version 7.0.2 (clang-700.1.81)
+# Target: x86_64-apple-darwin15.2.0
+# Thread model: posix
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then, install the package:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apm install autocomplete-clang
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;linter-clang-https-atom-io-packages-linter-clang:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;&lt;a href=&#34;https://atom.io/packages/linter-clang&#34;&gt;linter-clang&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;Lint your code with &lt;a href=&#34;https://atom.io/users/AtomLinter&#34;&gt;AtomLinter&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Make sure you have installed &lt;a href=&#34;https://github.com/atom-community/linter&#34;&gt;&lt;code&gt;linter&lt;/code&gt;&lt;/a&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apm install linter
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;apm install linter-clang
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;atom-beautify-https-atom-io-packages-atom-beautify:5a80f7b9ada2f8bd2a75fe3f8ed7109d&#34;&gt;&lt;a href=&#34;https://atom.io/packages/atom-beautify&#34;&gt;atom-beautify&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;To format our C code (and C++, Objective-C, etc) and fix all those linter&amp;rsquo;s warnings, we need &lt;a href=&#34;http://sourceforge.net/projects/uncrustify&#34;&gt;uncrustify&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew install uncrustify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Then:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;apm install uncrustify
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s it! 🎉&lt;/p&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/c-development.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;My theme is: &lt;a href=&#34;https://atom.io/themes/atom-material-ui&#34;&gt;Atom Material&lt;/a&gt; + &lt;a href=&#34;https://atom.io/themes/duotone-dark-syntax&#34;&gt;DuoTone dark&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Setup Python 3 &amp; Git on Windows 10</title>
+      <link>https://blog.lopezjuri.com/2015/12/28/setup-python-3--git-on-windows-10/</link>
+      <pubDate>Mon, 28 Dec 2015 12:08:21 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/28/setup-python-3--git-on-windows-10/</guid>
+      <description>
+
+&lt;p&gt;Personally, I don&amp;rsquo;t like installing software using binary installers from the official site, because in the long run you have to deal with incompatibilities and a sparse development ecosystem.&lt;/p&gt;
+
+&lt;p&gt;On systems as OSX or Linux you have well known package-managers like &lt;a href=&#34;brew.sh&#34;&gt;&lt;code&gt;brew&lt;/code&gt;&lt;/a&gt; and &lt;code&gt;apt-get&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;In the case of Windows there is &lt;a href=&#34;https://chocolatey.org/&#34;&gt;&lt;strong&gt;Chocolatey&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;chocolatey:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Chocolatey&lt;/h2&gt;
+
+&lt;h3 id=&#34;installing:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Installing&lt;/h3&gt;
+
+&lt;p&gt;We open the &lt;code&gt;PowerShell&lt;/code&gt; in &lt;strong&gt;Administrator Mode&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;You can find it at: &lt;code&gt;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;To install, we have to lower the security levels with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;Set-ExecutionPolicy Unrestricted
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s install it with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;iex ((new-object net.webclient).DownloadString(&#39;https://chocolatey.org/install.ps1&#39;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;usage:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Usage&lt;/h3&gt;
+
+&lt;p&gt;You can install any program listed on &lt;a href=&#34;https://chocolatey.org/packages&#34;&gt;chocolatey.org/packages&lt;/a&gt; with &lt;code&gt;choco install&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install firefox
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You can add a &lt;code&gt;-y&lt;/code&gt; argument to install immediately:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install atom -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;git:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Git&lt;/h2&gt;
+
+&lt;p&gt;To install git it&amp;rsquo;s simply as:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install git.install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start using it, we have to restart the PowerShell or refresh or &lt;code&gt;$PATH&lt;/code&gt; environment variable with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;$env:Path = [System.Environment]::GetEnvironmentVariable(&amp;quot;Path&amp;quot;, &amp;quot;User&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now &lt;code&gt;git&lt;/code&gt; command should work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;git help
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;optional-git-setup:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Optional Git Setup&lt;/h3&gt;
+
+&lt;p&gt;I recommend:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;echo &amp;quot;Identify yourself&amp;quot;
+git config --global user.name &amp;quot;NAME LASTNAME&amp;quot;
+git config --global user.email email@foo.com
+
+echo &amp;quot;Don&#39;t ask again our user and password&amp;quot;
+git config --global credential.helper wincred
+
+echo &amp;quot;Colors!&amp;quot;
+git config --global color.ui auto
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;python-3:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;Python 3&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;choco install python -y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;pip:f4829d7c6a3906927c4d4a0f6db8837c&#34;&gt;pip&lt;/h3&gt;
+
+&lt;p&gt;Pip comes with this installation, you can see it at &lt;code&gt;C:\tools\python\Scripts&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Try, &lt;code&gt;pip&lt;/code&gt; on your console, if it does not work, restart the PowerShell. If the problem continues, it&amp;rsquo;s probably because it is not added to the &lt;code&gt;$PATH&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;To do so:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;[Environment]::SetEnvironmentVariable(&amp;quot;Path&amp;quot;, &amp;quot;$env:Path;C:\tools\python\Scripts\&amp;quot;, &amp;quot;User&amp;quot;)&lt;/code&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

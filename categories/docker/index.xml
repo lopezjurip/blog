@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docker on blog.</title>
+    <link>https://blog.lopezjuri.com/categories/docker/</link>
+    <description>Recent content in Docker on blog.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 29 Dec 2015 16:16:50 -0300</lastBuildDate>
+    <atom:link href="https://blog.lopezjuri.com/categories/docker/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mounting Go Revel API &#43; MongoDB on Docker</title>
+      <link>https://blog.lopezjuri.com/2015/12/29/mounting-go-revel-api--mongodb-on-docker/</link>
+      <pubDate>Tue, 29 Dec 2015 16:16:50 -0300</pubDate>
+      
+      <guid>https://blog.lopezjuri.com/2015/12/29/mounting-go-revel-api--mongodb-on-docker/</guid>
+      <description>
+
+&lt;p&gt;Go is fast, modern and fun to use. There are good web frameworks like &lt;a href=&#34;https://github.com/go-martini/martini&#34;&gt;martini&lt;/a&gt; or &lt;a href=&#34;https://github.com/gin-gonic/gin&#34;&gt;gin&lt;/a&gt;. The last time I tried &lt;code&gt;gin&lt;/code&gt; I had lot of troubles declaring the routes, so I moved to Revel.&lt;/p&gt;
+
+&lt;p&gt;It is known that Go doesn&amp;rsquo;t have a very good dependency management, so we will use &lt;a href=&#34;https://github.com/tools/godep&#34;&gt;github.com/tools/godep&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I am a fan of Docker 🐳, because I like to keep things simple and easy to use (and deploy). So I will write about how to mount a Revel app using Docker.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;See the complete project on: &lt;a href=&#34;https://github.com/mrpatiwi/revel-mongo-api&#34;&gt;&lt;strong&gt;github.com/mrpatiwi/revel-mongo-api&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;preparation:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Preparation&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Make sure you have Go installed and your &lt;code&gt;$GOPATH&lt;/code&gt; is set.&lt;/li&gt;
+&lt;li&gt;You will need &lt;a href=&#34;https://docs.docker.com/machine/&#34;&gt;Docker-Machine&lt;/a&gt; if you are on OSX.&lt;/li&gt;
+&lt;li&gt;Have &lt;a href=&#34;https://www.docker.com/&#34;&gt;Docker&lt;/a&gt; and &lt;a href=&#34;https://docs.docker.com/compose/&#34;&gt;Docker-Compose&lt;/a&gt; installed.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.mongodb.org/&#34;&gt;MongoDB&lt;/a&gt; installed.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;revel:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Revel&lt;/h2&gt;
+
+&lt;p&gt;You can follow the official steps on &lt;a href=&#34;https://revel.github.io&#34;&gt;revel.github.io&lt;/a&gt;, but in short words it goes like this:&lt;/p&gt;
+
+&lt;p&gt;Let&amp;rsquo;s install the basic dependencies:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;go get github.com/revel/revel
+go get github.com/revel/cmd/revel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;From here and forward:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Replace &lt;code&gt;mrpatiwi&lt;/code&gt; with your Github username&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Replace &lt;code&gt;revel-mongo-api&lt;/code&gt; with you app name&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Generate our app:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;revel new github.com/mrpatiwi/revel-mongo-api
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;cd $GOPATH/src/github.com/mrpatiwi/revel-mongo-api
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To start our app and see if it&amp;rsquo;s working:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;revel run github.com/mrpatiwi/revel-mongo-api
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/reveldocker-helloworld.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;h2 id=&#34;installing-godep:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Installing Godep&lt;/h2&gt;
+
+&lt;p&gt;You can find project&amp;rsquo;s repository at: &lt;a href=&#34;https://github.com/tools/godep&#34;&gt;github.com/tools/godep&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To install:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;go get github.com/tools/godep
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This basically manage your project dependencies saving in a file &lt;code&gt;Godeps/Godeps.json&lt;/code&gt; all the necessary information.&lt;/p&gt;
+
+&lt;p&gt;Every time we require a new Go dependency we have to save it with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;godep save ./app
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure to ignore the directory: &lt;code&gt;Godeps/_workspace&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Append this to your .gitignore
+Godeps/_workspace
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When someone clones a clean version of your project, they will not have the dependencies installed. To do so:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;godep go install ./app
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure to document that 👍&lt;/p&gt;
+
+&lt;h2 id=&#34;docker:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Docker&lt;/h2&gt;
+
+&lt;p&gt;We must put a &lt;code&gt;Dockerfile&lt;/code&gt; on the root of our project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-dockerfile&#34;&gt;FROM golang:1.5.2
+
+# Move current project to a valid go path
+COPY . /go/src/github.com/mrpatiwi/revel-mongo-api
+WORKDIR /go/src/github.com/mrpatiwi/revel-mongo-api
+
+# Install Revel CLI
+RUN go get github.com/revel/cmd/revel
+
+# Install project dependencies
+RUN go get github.com/tools/godep
+RUN godep go install ./app
+
+# Run app in production mode
+EXPOSE 9000
+ENTRYPOINT revel run github.com/mrpatiwi/revel-mongo-api prod 9000
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To make deploying easier, we will use Docker-Compose. This will be even more useful when we integrate our app with MongoDB. We create a file named &lt;code&gt;docker-compose.yml&lt;/code&gt; with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;# docker-compose.yml
+
+web:
+  build: .
+  restart: always
+  ports:
+    - &#39;80:9000&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To build and run our project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;# Run in &#39;detached&#39; (background) mode
+docker-compose up -d
+# Building web
+# Step 1 : FROM golang:1.5.2
+# ...
+# Step 8 : ENTRYPOINT revel run github.com/mrpatiwi/revel-mongo-api prod 9000
+#  ---&amp;gt; Running in 04dc37d33f14
+#  ---&amp;gt; ef842993944f
+# Removing intermediate container 04dc37d33f14
+# Successfully built ef842993944f
+# Creating revelmongoapi_web_1
+&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;figure &gt;
+    
+        &lt;img src=&#34;https://blog.lopezjuri.com/images/reveldocker-helloworld2.png&#34; /&gt;
+    
+    
+&lt;/figure&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;code&gt;192.168.99.100&lt;/code&gt; is the IP of my local machine ran by Docker-Machine.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;See the logs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker-compose logs
+# Attaching to revelmongoapi_web_1
+# web_1 | ~
+# web_1 | ~ revel! http://revel.github.io
+# web_1 | ~
+# web_1 | Listening on :9000...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Stop and remove:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker-compose stop &amp;amp;&amp;amp; docker-compose rm -f
+# Stopping revelmongoapi_web_1 ... done
+# Going to remove revelmongoapi_web_1
+# Removing revelmongoapi_web_1 ... done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;mongodb:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;MongoDB&lt;/h2&gt;
+
+&lt;p&gt;When developing, install this database in your computer. If you are on OSX it&amp;rsquo;s easy with &lt;code&gt;brew&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;brew install mongodb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;On &lt;em&gt;production&lt;/em&gt; environment we will use MongoDB Docker Image.&lt;/p&gt;
+
+&lt;p&gt;Back to our project, let&amp;rsquo;s use &lt;a href=&#34;https://labix.org/mgo&#34;&gt;go-mgo/mgo&lt;/a&gt; as our database driver.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;go get gopkg.in/mgo.v2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;model:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Model&lt;/h3&gt;
+
+&lt;p&gt;Just to exemplify, we will create a &lt;code&gt;Book&lt;/code&gt; model:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// app/models/book.go
+
+package models
+
+import &amp;quot;gopkg.in/mgo.v2/bson&amp;quot;
+
+/*
+Book model
+*/
+type Book struct {
+	ID    bson.ObjectId `json:&amp;quot;_id,omitempty&amp;quot; bson:&amp;quot;_id,omitempty&amp;quot;`
+	Title string        `json:&amp;quot;title&amp;quot; bson:&amp;quot;title&amp;quot;`
+	Pages int           `json:&amp;quot;pages&amp;quot; bson:&amp;quot;pages&amp;quot;`
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note the marshaling attributes:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;json&lt;/code&gt;: How we want the key when encoding and decoding from and to JSON. The attribute &lt;code&gt;omitempty&lt;/code&gt; hide the field when it is empty.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;bson&lt;/code&gt;: How we want the MongoDB key. The attribute &lt;code&gt;omitempty&lt;/code&gt; same as above.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;database-connection:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Database connection&lt;/h3&gt;
+
+&lt;p&gt;We have to setup our database, so we will crate a package named &lt;code&gt;database&lt;/code&gt; in charge of this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// app/database/setup.go
+
+package database
+
+import &amp;quot;gopkg.in/mgo.v2&amp;quot;
+
+/*
+Database session
+*/
+var Session *mgo.Session
+
+/*
+Book&#39;s model connection
+*/
+var Books *mgo.Collection
+
+/*
+Init database
+*/
+func Init(uri, dbname string) error {
+	session, err := mgo.Dial(uri)
+	if err != nil {
+		return err
+	}
+
+	// See https://godoc.org/labix.org/v2/mgo#Session.SetMode
+	session.SetMode(mgo.Monotonic, true)
+
+	// Expose session and models
+	Session = session
+	Books = session.DB(dbname).C(&amp;quot;books&amp;quot;)
+
+	return nil
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Remember to use &lt;em&gt;Upper Camel Case&lt;/em&gt; to make a variable, function or struct &lt;strong&gt;public outside the package&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;settings:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Settings&lt;/h4&gt;
+
+&lt;p&gt;Our database have at least two environment: &lt;em&gt;production&lt;/em&gt; and &lt;em&gt;development&lt;/em&gt;, so we need different setups for each one of this.&lt;/p&gt;
+
+&lt;p&gt;First, we will modify &lt;code&gt;conf/app.conf&lt;/code&gt; and set how we &lt;em&gt;dial&lt;/em&gt; the database in &lt;em&gt;development&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;# conf/app.conf
+
+# ...
+
+################################################################################
+# Section: dev
+# This section is evaluated when running Revel in dev mode. Like so:
+#   `revel run path/to/myapp`
+[dev]
+# This sets `DevMode` variable to `true` which can be used in your code as
+#   `if revel.DevMode {...}`
+#   or in your templates with
+#   `&amp;lt;no value&amp;gt;`
+mode.dev = true
+
+# ...
+
+# Database
+database.uri  = &amp;quot;mongodb://localhost:27017&amp;quot;  # &amp;lt;- HERE!
+database.name = &amp;quot;revelapp&amp;quot;                   # &amp;lt;- HERE!
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now we need to init our database inside &lt;code&gt;app/init.go&lt;/code&gt; using &lt;code&gt;revel.OnAppStart(...)&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// app/init.go
+package app
+
+import (
+	&amp;quot;github.com/mrpatiwi/revel-mongo-api/app/database&amp;quot;
+	&amp;quot;github.com/revel/revel&amp;quot;
+)
+
+func init() {
+	revel.Filters = []revel.Filter{
+		revel.PanicFilter,
+		// ...
+		revel.ActionInvoker,
+	}
+
+	// Startup
+	revel.OnAppStart(InitDB)
+}
+
+/*
+InitDB to connection to database
+*/
+func InitDB() {
+	// The second argument are default values, for safety
+	uri := revel.Config.StringDefault(&amp;quot;database.uri&amp;quot;, &amp;quot;mongodb://localhost:27017&amp;quot;)
+	name := revel.Config.StringDefault(&amp;quot;database.name&amp;quot;, &amp;quot;revelapp&amp;quot;)
+	if err := database.Init(uri, name); err != nil {
+		revel.INFO.Println(&amp;quot;DB Error&amp;quot;, err)
+	}
+}
+
+var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
+	c.Response.Out.Header().Add(&amp;quot;X-Frame-Options&amp;quot;, &amp;quot;SAMEORIGIN&amp;quot;)
+	c.Response.Out.Header().Add(&amp;quot;X-XSS-Protection&amp;quot;, &amp;quot;1; mode=block&amp;quot;)
+	c.Response.Out.Header().Add(&amp;quot;X-Content-Type-Options&amp;quot;, &amp;quot;nosniff&amp;quot;)
+
+	fc[0](c, fc[1:]) // Execute the next filter stage.
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;routes:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Routes&lt;/h3&gt;
+
+&lt;p&gt;Setup the endpoints in &lt;code&gt;conf/routes&lt;/code&gt;, then we will code the controller:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;# conf/routes
+
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+module:testrunner
+
+GET     /                                       App.Index
+GET     /books/                                 Books.Index
+POST    /books/create                           Books.Create
+GET     /books/:id                              Books.Show
+
+# ...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;controller:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Controller&lt;/h3&gt;
+
+&lt;p&gt;Create a file at: &lt;code&gt;app/controllers/books.go&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;// app/controllers/books.go
+
+package controllers
+
+import (
+	&amp;quot;encoding/json&amp;quot;
+	&amp;quot;io/ioutil&amp;quot;
+	&amp;quot;log&amp;quot;
+	&amp;quot;net/http&amp;quot;
+
+	&amp;quot;github.com/mrpatiwi/revel-mongo-api/app/database&amp;quot;
+	&amp;quot;github.com/mrpatiwi/revel-mongo-api/app/models&amp;quot;
+	&amp;quot;github.com/revel/revel&amp;quot;
+	&amp;quot;gopkg.in/mgo.v2/bson&amp;quot;
+)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Declare this is a controller named &lt;code&gt;Books&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;/*
+Books controller
+*/
+type Books struct {
+	*revel.Controller
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;post-books-create:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;POST /books/create&lt;/h4&gt;
+
+&lt;p&gt;To have some data to show, first we will create the handler controller for &lt;code&gt;POST /books/create&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;/*
+Create book
+*/
+func (c Books) Create() revel.Result {
+	book := &amp;amp;models.Book{}
+	if body, err := ioutil.ReadAll(c.Request.Body); err != nil {
+		return c.RenderText(&amp;quot;bad request&amp;quot;)
+
+	} else if err := json.Unmarshal(body, book); err != nil {
+		return c.RenderText(&amp;quot;could not parse request&amp;quot;)
+
+	} else if err := database.Books.Insert(book); err != nil {
+		// Internal Server Error
+		log.Fatal(err)
+		c.Response.Status = http.StatusInternalServerError
+		return c.RenderText(&amp;quot;could not be saved&amp;quot;)
+	}
+	c.Response.Status = http.StatusCreated
+	return c.RenderJson(book)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can test it using &lt;code&gt;curl&lt;/code&gt; from the command line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -H &amp;quot;Content-Type: application/json&amp;quot; \
+  -X POST -d &#39;{ &amp;quot;title&amp;quot;: &amp;quot;Animal Farm&amp;quot;, &amp;quot;pages&amp;quot;: 100 }&#39; -i \
+  http://localhost:9000/books/create
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Response:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;HTTP/1.1 201 Created
+Content-Length: 44
+Content-Type: application/json; charset=utf-8
+Date: Wed, 30 Dec 2015 00:52:24 GMT
+Set-Cookie: REVEL_FLASH=; Path=/
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+
+{
+  &amp;quot;title&amp;quot;: &amp;quot;Animal Farm&amp;quot;,
+  &amp;quot;pages&amp;quot;: 100
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;get-books:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;GET /books&lt;/h4&gt;
+
+&lt;p&gt;Let&amp;rsquo;s create a Index where we will return every book in the database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;/*
+Index of all books
+*/
+func (c Books) Index() revel.Result {
+	results := []models.Book{}
+	if err := database.Books.Find(bson.M{}).All(&amp;amp;results); err != nil {
+		// Internal Server Error
+		log.Fatal(err)
+	}
+	return c.RenderJson(results)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let&amp;rsquo;s see our created book:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -i http://localhost:9000/books
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Response:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;HTTP/1.1 200 OK
+Content-Length: 277
+Content-Type: application/json; charset=utf-8
+Date: Wed, 30 Dec 2015 00:55:38 GMT
+Set-Cookie: REVEL_FLASH=; Path=/
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+
+[
+  {
+    &amp;quot;_id&amp;quot;: &amp;quot;56832ac8c52f68da8cae6818&amp;quot;,
+    &amp;quot;title&amp;quot;: &amp;quot;Animal Farm&amp;quot;,
+    &amp;quot;pages&amp;quot;: 100
+  }
+]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;get-books-id:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;GET /books/:id&lt;/h4&gt;
+
+&lt;p&gt;To show a individual Book:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-go&#34;&gt;/*
+Show particular book
+*/
+func (c Books) Show(id string) revel.Result {
+	result := models.Book{}
+	if !bson.IsObjectIdHex(id) {
+		c.Response.Status = http.StatusBadRequest
+		return c.RenderText(&amp;quot;id is not valid&amp;quot;)
+
+	} else if obj := bson.ObjectIdHex(id); !obj.Valid() {
+		c.Response.Status = http.StatusBadRequest
+		return c.RenderText(&amp;quot;id is not valid&amp;quot;)
+
+	} else if err := database.Books.Find(bson.M{&amp;quot;_id&amp;quot;: obj}).One(&amp;amp;result); err != nil {
+		// Internal Server Error
+		log.Fatal(err)
+	}
+	return c.RenderJson(result)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can get the &lt;code&gt;id&lt;/code&gt; from the previous request. So:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;curl -i http://localhost:9000/books/56832ac8c52f68da8cae6818
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Response:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-txt&#34;&gt;HTTP/1.1 200 OK
+Content-Length: 81
+Content-Type: application/json; charset=utf-8
+Date: Wed, 30 Dec 2015 00:57:22 GMT
+Set-Cookie: REVEL_FLASH=; Path=/
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+X-Xss-Protection: 1; mode=block
+
+{
+  &amp;quot;_id&amp;quot;: &amp;quot;56832ac8c52f68da8cae6818&amp;quot;,
+  &amp;quot;title&amp;quot;: &amp;quot;Animal Farm&amp;quot;,
+  &amp;quot;pages&amp;quot;: 100
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;mongodb-image:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;MongoDB Image&lt;/h3&gt;
+
+&lt;p&gt;On production, we need a container running MongoDB. We have to modify our &lt;code&gt;docker-compose.yml&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yml&#34;&gt;web:
+  build: .
+  restart: always
+  links:
+    - mongo
+  ports:
+    - &#39;80:9000&#39;
+
+mongo:
+  image: mongo
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Back to our &lt;code&gt;conf/app.conf&lt;/code&gt; file, we have to add &lt;code&gt;mongo&lt;/code&gt; as our host running the database:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-conf&#34;&gt;# conf/app.conf
+
+# ...
+
+################################################################################
+# Section: dev
+
+# ...
+
+################################################################################
+# Section: prod
+# This section is evaluated when running Revel in production mode. Like so:
+#   `revel run path/to/myapp prod`
+# See:
+#  [dev] section for documentation of the various settings
+[prod]
+mode.dev = false
+
+# ...
+
+# Database
+databaseuri  = &amp;quot;mongodb://mongo:27017&amp;quot;
+databasename = &amp;quot;revelapp&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;last-details:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Last details&lt;/h3&gt;
+
+&lt;p&gt;We add the new dependencies to &lt;code&gt;Godep/Godep.json&lt;/code&gt; with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;godep save ./app
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;run-it:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Run it&lt;/h2&gt;
+
+&lt;p&gt;This is the most simple setup, but it is a good starting point.&lt;/p&gt;
+
+&lt;p&gt;To launch our app:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-sh&#34;&gt;docker-compose up -d
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;conclusions:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Conclusions&lt;/h1&gt;
+
+&lt;p&gt;Revel is a well-thinked framework, although still in beta.&lt;/p&gt;
+
+&lt;p&gt;Left pending in this post:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Remove unused middleware, if we want to develop an API, we do not need cookies or HTML rendering.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;pros:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Pros:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;A true framework. It calls you, not not the other way around.&lt;/li&gt;
+&lt;li&gt;Excellent routing system.&lt;/li&gt;
+&lt;li&gt;It is focused on full-stack web apps. I have to try Meteor.js and compare it to Revel before replacing Ruby on Rails 😄&lt;/li&gt;
+&lt;li&gt;Config file with environments 👌&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;cons:bbf8466e6007f86e0622c2d9c8fa2970&#34;&gt;Cons:&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Manual database integration, but they &lt;a href=&#34;https://revel.github.io/#Wishlist&#34;&gt;have something in plans&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;You must start the app with Revel CLI, this can cause some integration problems.&lt;/li&gt;
+&lt;li&gt;Does it scale? 📈&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

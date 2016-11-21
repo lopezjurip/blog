@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      
+      
+      
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i = 0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>Comentarios sobre Filtrado Colaborativo de Herlocker J. &middot; Patricio López J.</title>
+
+  
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/poole-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-overrides.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/hyde-x.css">
+  <link rel="stylesheet" href="https://blog.lopezjuri.com/css/highlight/railscasts.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://blog.lopezjuri.com/touch-icon-144-precomposed.png">
+  <link href="https://blog.lopezjuri.com/favicon.png" rel="icon">
+
+  
+  
+  
+  
+
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="author" href="http://plus.google.com/105711235388160251353">
+</head>
+<body>
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+    <div class="sidebar-about">
+      
+        <img src="https://www.gravatar.com/avatar/dc6b7d7fbef65eda1ce854dbe02f8db3?s=200"
+             alt="gravatar" title="Patricio López J.">
+      
+      <h1>Patricio López J.</h1>
+      <p class="lead">Full-stack developer from Chile</p>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/">Blog</a></li>
+      
+      <li class="sidebar-nav-item"><a href="https://blog.lopezjuri.com/about/">About</a></li>
+      
+    </ul>
+
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-item">
+      <a href="https://github.com/mrpatiwi"><i class="fa fa-github-square fa-3x"></i></a>
+      <a href="https://bitbucket.org/mrpatiwi"><i class="fa fa-bitbucket-square fa-3x"></i></a>
+      
+      <a href="https://www.linkedin.com/in/lopezjuri"><i class="fa fa-linkedin-square fa-3x"></i></a>
+      
+      
+      <a href="https://twitter.com/MrPatiwi"><i class="fa fa-twitter-square fa-3x"></i></a>
+      
+      <a href="https://blog.lopezjuri.com/index.xml" type="application/rss+xml"><i class="fa fa-rss-square fa-3x"></i></a>
+      </li>
+    </ul>
+
+    
+
+    <p>Copyright &copy; 2016 <a href="https://blog.lopezjuri.com/license/">License</a><br/>
+       Powered by <a href="http://gohugo.io">Hugo</a> and <a href="https://github.com/zyro/hyde-x">Hyde-X</a></p>
+  </div>
+</div>
+
+
+<div class="content container">
+  <div class="post">
+    <h1>Comentarios sobre Filtrado Colaborativo de Herlocker J.</h1>
+    <span class="post-date">Aug 21, 2016 &middot; 2 minute read &middot; <a href="https://blog.lopezjuri.com/2016/08/21/comentarios-sobre-filtrado-colaborativo-de-herlocker-j./#disqus_thread">Comments</a>
+    
+    <br/>
+    <a class="label" href="https://blog.lopezjuri.com/categories/recsys">recsys</a>
+    </span>
+    
+
+<p>El <em>paper</em> parte con el problema de <em>recomendación colaborativa</em> y lo divide en etapas. Luego en cada etapa toma ciertos posibles modos de abordarla y los pone en comparación. Finalmente concluye con <strong>un flujo de trabajo sugerido</strong>, no obstante avisa de ciertos cuidados a considerar dependiendo del contexto y el tipo de datos que tenemos.</p>
+
+<p>La ventaja de un filtrado colaborativo es que no depende de la información intrínseca de un ítem, sino que se basa en el contexto de los usuarios que lo recomiendan y como me parezco a ellos. De esta forma es posible obtener recomendaciones de ítems que a ese tipo de usuarios les parece importantes.</p>
+
+<p>Esto es bueno porque pueden ocurrir recomendaciones <em>&lsquo;serendipitous&rsquo;</em> (<em>fortuitas</em>), que son items con contenido que yo no esperaba pero me resultaron muy preciadas.</p>
+
+<h3 id="sobre-las-semejanzas-de-los-usuarios:8de50cd2ab861f6f157dd7f4afd5179e">Sobre las semejanzas de los usuarios</h3>
+
+<p>Creo que la razón por la cual la <em>correlación de Spearman</em> funciona mejor (por lo general) que la de <em>Pearson</em>, es que cuando a nosotros los humanos nos gusta mucho algo, <strong>la relación de eso con algo que solo nos <em>&ldquo;gusta más o menos&rdquo;</em> no es lineal, sino logarítmica</strong>. Esto, en mi opinión, hace que la medida de <em>Spearman</em> funcione mejor.</p>
+
+<blockquote>
+<p>Ver: <a href="http://www.scientificamerican.com/article/a-natural-log">http://www.scientificamerican.com/article/a-natural-log</a>.</p>
+</blockquote>
+
+<p>Me pareció muy interesante lo que salió a la luz cuando analizaban los vecinos más cercanos. Uno suele pensar en estas áreas de datos que mientras más información tengamos, siempre es mejor. Sin embargo, se aprecia que conviene trabajar dentro de cierto rango de vecinos. Pues muchos hacen menos precisa la recomendación y con muy pocos tenemos problemas <em>coverage</em>.</p>
+
+<p>En una parte habla de que <em>el proceso de recomendación debe hacerse en menos de 1 segundo para miles de usuarios</em>, sin embargo esto contradice un poco la metodología que están usando porque ellos mismo declaran que puede conllevar a problemas de escalabilidad.</p>
+
+<p>Finalmente, puesto que realizaron todo sobre el dataset de  MovieLens, sus algoritmos fueron probados para ítems del tipo <em>película/música</em>, entonces <strong>no podemos asegurar que este flujo de trabajo sugerido funcione en otros ámbitos</strong>. Por ejemplo, recomendar una persona en alguna aplicación de citas.</p>
+
+  </div>
+  <div id="disqus_thread"></div>
+</div>
+
+
+<script type="text/javascript">
+var disqus_shortname = "blog-lopezjuri";
+(function () {
+    var s = document.createElement('script'); s.async = true;
+    s.type = 'text/javascript';
+    s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+}());
+</script>
+
+
+
+<script type="text/javascript">
+    var disqus_shortname = "blog-lopezjuri";
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<script src="https://blog.lopezjuri.com/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script>
+  var _gaq=[['_setAccount','UA-57934557-3'],['_trackPageview']];
+  (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+  g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+  s.parentNode.insertBefore(g,s)}(document,'script'));
+</script>
+
+</body>
+</html>
+
